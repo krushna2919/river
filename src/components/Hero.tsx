@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import birdLogo from "@/assets/bird-logo.png";
+import CircularLogo from "./CircularLogo";
 
 const Hero = () => {
   return (
@@ -25,18 +25,14 @@ const Hero = () => {
       
       {/* Content */}
       <div className="container-wide relative z-10 text-center px-4">
-        {/* Bird Logo */}
+        {/* Circular Logo with Bird */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="mb-8"
+          className="mb-8 flex justify-center"
         >
-          <img 
-            src={birdLogo} 
-            alt="Rishi Valley Bird Logo" 
-            className="w-24 h-24 md:w-32 md:h-32 mx-auto object-contain"
-          />
+          <CircularLogo size={180} />
         </motion.div>
 
         <motion.h1

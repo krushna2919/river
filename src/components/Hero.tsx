@@ -3,9 +3,24 @@ import { ChevronDown } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center hero-section">
-      {/* Background - solid dark like original */}
-      <div className="absolute inset-0 bg-[#0a0a0a]" />
+    <section id="home" className="relative min-h-screen flex items-center justify-center hero-section overflow-hidden">
+      {/* Video Background */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source
+            src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
       
       {/* Content */}
       <div className="container-wide relative z-10 text-center px-4">

@@ -52,14 +52,19 @@ const Header = () => {
                   About Us
                   <ChevronDown size={16} />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white border-none shadow-lg">
-                  {aboutLinks.map((link) => (
-                    <DropdownMenuItem key={link.href} asChild>
+                <DropdownMenuContent className="bg-white border-none shadow-xl rounded-none min-w-[280px] p-0 z-50">
+                  {aboutLinks.map((link, index) => (
+                    <DropdownMenuItem key={link.href} asChild className="p-0 focus:bg-gray-50">
                       <a
                         href={link.href}
-                        className="cursor-pointer text-[#420d09] hover:bg-[#420d09]/10"
+                        className={`flex items-center justify-between w-full px-6 py-4 cursor-pointer text-[#333] hover:bg-gray-50 transition-colors ${
+                          index !== aboutLinks.length - 1 ? "border-b border-gray-200" : ""
+                        }`}
                       >
-                        {link.label}
+                        <span className="text-base font-normal">{link.label}</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
                       </a>
                     </DropdownMenuItem>
                   ))}
@@ -126,14 +131,19 @@ const Header = () => {
                   About Us
                   <ChevronDown size={16} />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white border-none shadow-lg">
-                  {aboutLinks.map((link) => (
-                    <DropdownMenuItem key={link.href} asChild>
+                <DropdownMenuContent className="bg-white border-none shadow-xl rounded-none min-w-[280px] p-0 z-50">
+                  {aboutLinks.map((link, index) => (
+                    <DropdownMenuItem key={link.href} asChild className="p-0 focus:bg-gray-50">
                       <a
                         href={link.href}
-                        className="cursor-pointer text-[#420d09] hover:bg-[#420d09]/10"
+                        className={`flex items-center justify-between w-full px-6 py-4 cursor-pointer text-[#333] hover:bg-gray-50 transition-colors ${
+                          index !== aboutLinks.length - 1 ? "border-b border-gray-200" : ""
+                        }`}
                       >
-                        {link.label}
+                        <span className="text-base font-normal">{link.label}</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
+                          <path d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
                       </a>
                     </DropdownMenuItem>
                   ))}

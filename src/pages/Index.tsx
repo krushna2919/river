@@ -1,10 +1,12 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Programs from "@/components/Programs";
-import Impact from "@/components/Impact";
-import Partnerships from "@/components/Partnerships";
-import Contact from "@/components/Contact";
+import OurStory from "@/components/OurStory";
+import OurImpact from "@/components/OurImpact";
+import NYTimesSpotlight from "@/components/NYTimesSpotlight";
+import Methodology from "@/components/Methodology";
+import Testimonials from "@/components/Testimonials";
+import DonateCTA from "@/components/DonateCTA";
+import CaseStudies from "@/components/CaseStudies";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -13,11 +15,13 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <About />
-        <Programs />
-        <Impact />
-        <Partnerships />
-        <Contact />
+        <OurStory />
+        <OurImpact />
+        <NYTimesSpotlight />
+        <Methodology />
+        <Testimonials />
+        <DonateCTA />
+        <CaseStudies />
       </main>
       <Footer />
     </div>

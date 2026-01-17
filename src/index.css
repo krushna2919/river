@@ -2,109 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Open+Sans:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Earthy, warm educational palette inspired by Rishi Valley */
-    --background: 42 33% 98%;
-    --foreground: 20 14% 15%;
+    /* Original site color palette - dark elegant theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
 
-    --card: 42 40% 97%;
-    --card-foreground: 20 14% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
 
-    --popover: 42 40% 97%;
-    --popover-foreground: 20 14% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
 
-    /* Maroon/Burgundy - primary brand color */
-    --primary: 350 60% 30%;
-    --primary-foreground: 42 40% 97%;
+    /* Terracotta/Brown primary - matching original button */
+    --primary: 16 55% 42%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Warm cream secondary */
-    --secondary: 40 40% 92%;
-    --secondary-foreground: 20 14% 15%;
+    --secondary: 30 20% 96%;
+    --secondary-foreground: 0 0% 8%;
 
-    /* Muted earthy tones */
-    --muted: 40 25% 90%;
-    --muted-foreground: 20 10% 40%;
+    --muted: 30 15% 94%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Forest green accent for nature theme */
-    --accent: 145 35% 35%;
-    --accent-foreground: 42 40% 97%;
+    --accent: 16 55% 42%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 42 40% 97%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 85%;
-    --input: 30 20% 85%;
-    --ring: 350 60% 30%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 16 55% 42%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    /* Custom tokens */
-    --gold: 38 70% 50%;
-    --terracotta: 18 60% 50%;
-    --forest: 145 35% 35%;
-    --cream: 42 40% 96%;
-    --maroon-light: 350 50% 40%;
-    --maroon-dark: 350 65% 22%;
+    /* Custom tokens matching original site */
+    --hero-bg: 0 0% 5%;
+    --hero-text: 0 0% 100%;
+    --terracotta: 16 55% 42%;
+    --terracotta-dark: 16 55% 35%;
+    --cream: 40 30% 96%;
+    --dark-section: 0 0% 8%;
+    --gold-accent: 38 60% 50%;
+    --light-gray: 0 0% 96%;
+    --text-gray: 0 0% 60%;
 
     /* Typography */
-    --font-heading: 'Playfair Display', Georgia, serif;
-    --font-body: 'Source Sans 3', system-ui, sans-serif;
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Open Sans', system-ui, sans-serif;
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(20 14% 15% / 0.08);
-    --shadow-medium: 0 8px 30px -8px hsl(20 14% 15% / 0.12);
-    --shadow-strong: 0 16px 50px -12px hsl(20 14% 15% / 0.2);
+    --shadow-soft: 0 4px 20px -4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 8px 30px -8px rgba(0, 0, 0, 0.15);
+    --shadow-strong: 0 16px 50px -12px rgba(0, 0, 0, 0.25);
 
-    --sidebar-background: 42 40% 97%;
-    --sidebar-foreground: 20 14% 15%;
-    --sidebar-primary: 350 60% 30%;
-    --sidebar-primary-foreground: 42 40% 97%;
-    --sidebar-accent: 40 40% 92%;
-    --sidebar-accent-foreground: 20 14% 15%;
-    --sidebar-border: 30 20% 85%;
-    --sidebar-ring: 350 60% 30%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 8%;
+    --sidebar-primary: 16 55% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 30 20% 96%;
+    --sidebar-accent-foreground: 0 0% 8%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 16 55% 42%;
   }
 
   .dark {
-    --background: 20 14% 10%;
-    --foreground: 42 30% 92%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
 
-    --card: 20 14% 13%;
-    --card-foreground: 42 30% 92%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 20 14% 13%;
-    --popover-foreground: 42 30% 92%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 350 55% 45%;
-    --primary-foreground: 42 30% 95%;
+    --primary: 16 55% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 20 10% 18%;
-    --secondary-foreground: 42 30% 92%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 20 10% 20%;
-    --muted-foreground: 40 15% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 145 30% 45%;
-    --accent-foreground: 42 30% 95%;
+    --accent: 16 55% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 45%;
-    --destructive-foreground: 42 30% 95%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 20 10% 22%;
-    --input: 20 10% 22%;
-    --ring: 350 55% 45%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 16 55% 50%;
 
-    --sidebar-background: 20 14% 12%;
-    --sidebar-foreground: 42 30% 92%;
-    --sidebar-primary: 350 55% 45%;
-    --sidebar-primary-foreground: 42 30% 95%;
-    --sidebar-accent: 20 10% 18%;
-    --sidebar-accent-foreground: 42 30% 92%;
-    --sidebar-border: 20 10% 22%;
-    --sidebar-ring: 350 55% 45%;
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 16 55% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 16 55% 50%;
   }
 }
 
@@ -126,98 +126,140 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     line-height: 1.2;
+    font-weight: 500;
   }
 }
 
 @layer components {
+  /* Hero styling - matching original dark background */
+  .hero-section {
+    background: hsl(var(--hero-bg));
+    color: hsl(var(--hero-text));
+  }
+
+  /* Terracotta button - matching original */
+  .btn-terracotta {
+    @apply px-8 py-4 font-semibold uppercase tracking-wider text-sm transition-all;
+    background: hsl(var(--terracotta));
+    color: hsl(0 0% 100%);
+  }
+
+  .btn-terracotta:hover {
+    background: hsl(var(--terracotta-dark));
+  }
+
+  /* Typography classes matching original */
   .heading-hero {
-    @apply text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-wide;
     font-family: var(--font-heading);
   }
 
   .heading-section {
-    @apply text-3xl md:text-4xl font-semibold;
+    @apply text-3xl md:text-4xl lg:text-5xl font-medium;
     font-family: var(--font-heading);
   }
 
-  .heading-card {
-    @apply text-xl md:text-2xl font-medium;
-    font-family: var(--font-heading);
+  .heading-subsection {
+    @apply text-sm uppercase tracking-[0.2em] font-semibold;
+    font-family: var(--font-body);
+    color: hsl(var(--terracotta));
   }
 
   .text-body-lg {
-    @apply text-lg md:text-xl leading-relaxed;
+    @apply text-lg md:text-xl leading-relaxed font-light;
+  }
+
+  /* Container classes */
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .container-narrow {
     @apply max-w-4xl mx-auto px-4 sm:px-6;
   }
 
-  .container-wide {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  /* Dark section */
+  .section-dark {
+    background: hsl(var(--dark-section));
+    color: hsl(0 0% 100%);
   }
 
-  .gradient-hero {
-    background: linear-gradient(
-      180deg,
-      hsl(var(--primary)) 0%,
-      hsl(var(--maroon-dark)) 100%
-    );
+  /* Light cream section */
+  .section-cream {
+    background: hsl(var(--cream));
   }
 
-  .gradient-accent {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--accent)) 0%,
-      hsl(var(--forest)) 100%
-    );
+  /* Impact stat styling */
+  .stat-number {
+    @apply text-5xl md:text-6xl lg:text-7xl font-medium;
+    font-family: var(--font-heading);
+    color: hsl(var(--terracotta));
   }
 
-  .pattern-dots {
-    background-image: radial-gradient(
-      circle,
-      hsl(var(--primary) / 0.1) 1px,
-      transparent 1px
-    );
-    background-size: 20px 20px;
+  /* Quote styling */
+  .quote-text {
+    @apply text-xl md:text-2xl italic leading-relaxed;
+    font-family: var(--font-heading);
   }
 
+  /* Card hover effect */
   .card-hover {
     @apply transition-all duration-300;
   }
 
   .card-hover:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-medium);
   }
 
-  .divider-ornate {
-    @apply relative h-px bg-border;
+  /* Scroll indicator */
+  .scroll-indicator {
+    @apply text-xs uppercase tracking-[0.3em];
+    color: hsl(var(--text-gray));
   }
 
-  .divider-ornate::after {
-    content: '◆';
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-4 text-primary text-xs;
+  /* Testimonial card */
+  .testimonial-card {
+    @apply p-8 bg-white rounded-lg shadow-soft;
+  }
+
+  /* Case study card */
+  .case-study-card {
+    @apply overflow-hidden bg-white;
+  }
+
+  .case-study-card img {
+    @apply transition-transform duration-500;
+  }
+
+  .case-study-card:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Tab styling */
+  .tab-active {
+    @apply relative;
+  }
+
+  .tab-active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary;
   }
 }
 
 @layer utilities {
   .animate-fade-up {
-    animation: fadeUp 0.6s ease-out forwards;
+    animation: fadeUp 0.8s ease-out forwards;
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.5s ease-out forwards;
+    animation: fadeIn 1s ease-out forwards;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(40px);
     }
     to {
       opacity: 1;
@@ -230,18 +272,12 @@
     to { opacity: 1; }
   }
 
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Gradient overlay for images */
+  .gradient-overlay {
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
   }
 }

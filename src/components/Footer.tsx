@@ -1,49 +1,43 @@
-import { Heart } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="gradient-hero text-primary-foreground">
-      <div className="container-wide py-12 md:py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+    <footer className="bg-[#0a0a0a] text-white">
+      <div className="container-wide py-16 md:py-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-                <span className="font-heading text-primary-foreground text-xl font-bold">RV</span>
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center">
+                <span className="font-heading text-xl font-medium">RV</span>
               </div>
               <div>
-                <h3 className="font-heading font-semibold text-xl">
-                  Rishi Valley
-                </h3>
-                <p className="text-primary-foreground/80 text-sm">
-                  Rural Education Centre
-                </p>
+                <h3 className="font-heading font-medium text-lg">Rishi Valley</h3>
+                <p className="text-white/60 text-sm">Rural Education Centre</p>
               </div>
             </div>
-            <p className="text-primary-foreground/70 max-w-md leading-relaxed mb-6">
+            <p className="text-white/60 text-sm leading-relaxed">
               Krishnamurti Foundation India's initiative for revolutionizing 
-              rural education through innovative multi-grade, multi-level 
-              teaching methodology since 1976.
+              rural education since 1976.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="font-heading font-medium text-lg mb-6">Quick Links</h4>
+            <ul className="space-y-3">
               {[
                 { label: "About Us", href: "#about" },
-                { label: "Programs", href: "#programs" },
+                { label: "What We Do", href: "#methodology" },
                 { label: "Our Impact", href: "#impact" },
-                { label: "Partnerships", href: "#partnerships" },
-                { label: "Get Involved", href: "#contact" },
+                { label: "Donate", href: "#donate" },
               ].map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                    className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -54,19 +48,18 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="font-heading font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2">
+            <h4 className="font-heading font-medium text-lg mb-6">Resources</h4>
+            <ul className="space-y-3">
               {[
-                { label: "RIVER Institute", href: "#programs" },
-                { label: "Satellite Schools", href: "#programs" },
-                { label: "Teacher Resources", href: "#contact" },
-                { label: "Publications", href: "#" },
-                { label: "Contact Us", href: "#contact" },
+                { label: "Methodology", href: "#methodology" },
+                { label: "Case Studies", href: "#" },
+                { label: "Blog", href: "#" },
+                { label: "Contact", href: "#" },
               ].map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                    className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
                   </a>
@@ -74,18 +67,48 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-heading font-medium text-lg mb-6">Contact Us</h4>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                <p className="text-white/60 text-sm">
+                  Rishi Valley - 517 352,<br />
+                  Chittoor District,<br />
+                  Andhra Pradesh, India
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-primary shrink-0" />
+                <a
+                  href="mailto:office@rishivalley.org"
+                  className="text-white/60 hover:text-white transition-colors text-sm"
+                >
+                  office@rishivalley.org
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-primary shrink-0" />
+                <span className="text-white/60 text-sm">
+                  (08571) 280622
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-primary-foreground/20 mb-8" />
+        <div className="h-px bg-white/10 mb-8" />
 
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
           <p>
             © {currentYear} Rishi Valley Rural Education Centre. All rights reserved.
           </p>
-          <p className="flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 text-terracotta fill-current" /> for rural education
+          <p>
+            A Krishnamurti Foundation India Initiative
           </p>
         </div>
       </div>

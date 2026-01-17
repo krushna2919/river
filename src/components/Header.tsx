@@ -15,10 +15,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -44,61 +41,93 @@ const Header = () => {
     { label: "Reports", href: "#reports" },
   ];
 
-  // Reusable dropdown component
+  // Reusable dropdown component (matches original: opens on hover; items highlight on hover)
   const NavDropdown = ({
     label,
     links,
-    isScrolled,
     isWhiteText = true,
   }: {
     label: string;
     links: { label: string; href: string }[];
-    isScrolled: boolean;
     isWhiteText?: boolean;
-  }) => (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        className={`flex items-center gap-1 text-sm uppercase tracking-[0.15em] font-medium transition-colors outline-none ${
-          isWhiteText
-            ? "text-white/90 hover:text-white"
-            : "text-[#420d09] hover:text-[#420d09]/80"
-        }`}
-      >
-        {label}
-        <ChevronDown size={16} />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white border-none shadow-xl rounded-none min-w-[280px] p-0 z-50">
-        {links.map((link, index) => (
-          <DropdownMenuItem key={link.href} asChild className="p-0 focus:bg-gray-50">
-            <a
-              href={link.href}
-              className={`flex items-center justify-between w-full px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors ${
-                index !== links.length - 1 ? "border-b border-gray-200" : ""
-              } ${isScrolled ? "text-[#a0522d]" : "text-[#333]"}`}
-            >
-              <span className="text-base font-normal">{link.label}</span>
-              {isScrolled ? (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#a0522d]">
-                  <path d="M5 12H19M19 12L13 6M19 12L13 18" />
-                </svg>
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              )}
-            </a>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+  }) => {
+    const [open, setOpen] = useState(false);
+
+    return (
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <div
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+          className="relative"
+        >
+          <DropdownMenuTrigger
+            className={`flex items-center gap-1 text-sm uppercase tracking-[0.15em] font-medium transition-colors outline-none ${
+              isWhiteText
+                ? "text-hero-text/90 hover:text-hero-text"
+                : "text-foreground hover:text-foreground/80"
+            }`}
+          >
+            {label}
+            <ChevronDown size={16} />
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent className="z-50 bg-background border-none shadow-strong rounded-none min-w-[280px] p-0">
+            {links.map((link, index) => (
+              <DropdownMenuItem
+                key={link.href}
+                asChild
+                className={`group p-0 focus:bg-muted rounded-none ${
+                  index !== links.length - 1 ? "border-b border-border" : ""
+                }`}
+              >
+                <a
+                  href={link.href}
+                  className="flex items-center justify-between w-full px-6 py-4 cursor-pointer transition-colors group-hover:bg-muted"
+                >
+                  <span className="text-base font-normal text-foreground group-hover:text-terracotta">
+                    {link.label}
+                  </span>
+
+                  {/* Default icon (diagonal) */}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="text-muted-foreground group-hover:hidden"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+
+                  {/* Hover icon (horizontal) */}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="hidden text-terracotta group-hover:block"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12H19M19 12L13 6M19 12L13 18" />
+                  </svg>
+                </a>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </div>
+      </DropdownMenu>
+    );
+  };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible ${
-        isScrolled
-          ? "bg-white shadow-md py-2"
-          : "bg-transparent pt-6"
+        isScrolled ? "bg-background shadow-md py-2" : "bg-transparent pt-6"
       }`}
     >
       <div className="container-wide">
@@ -110,8 +139,8 @@ const Header = () => {
           {/* Left Navigation (shown when not scrolled) */}
           {!isScrolled && (
             <nav className="hidden lg:flex items-center gap-8">
-              <NavDropdown label="About Us" links={aboutLinks} isScrolled={isScrolled} isWhiteText={true} />
-              <NavDropdown label="What We Do" links={whatWeDoLinks} isScrolled={isScrolled} isWhiteText={true} />
+              <NavDropdown label="About Us" links={aboutLinks} isWhiteText />
+              <NavDropdown label="What We Do" links={whatWeDoLinks} isWhiteText />
             </nav>
           )}
 
@@ -144,10 +173,10 @@ const Header = () => {
           {/* Right Navigation (shown when not scrolled) */}
           {!isScrolled && (
             <nav className="hidden lg:flex items-center gap-8">
-              <NavDropdown label="Our Impact" links={ourImpactLinks} isScrolled={isScrolled} isWhiteText={true} />
+              <NavDropdown label="Our Impact" links={ourImpactLinks} isWhiteText />
               <a
                 href="#donate"
-                className="text-white/90 hover:text-white text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+                className="text-hero-text/90 hover:text-hero-text text-sm uppercase tracking-[0.15em] font-medium transition-colors"
               >
                 Donate
               </a>
@@ -157,12 +186,12 @@ const Header = () => {
           {/* Scrolled Navigation (right side) */}
           {isScrolled && (
             <nav className="hidden lg:flex items-center gap-8">
-              <NavDropdown label="About Us" links={aboutLinks} isScrolled={isScrolled} isWhiteText={false} />
-              <NavDropdown label="What We Do" links={whatWeDoLinks} isScrolled={isScrolled} isWhiteText={false} />
-              <NavDropdown label="Our Impact" links={ourImpactLinks} isScrolled={isScrolled} isWhiteText={false} />
+              <NavDropdown label="About Us" links={aboutLinks} isWhiteText={false} />
+              <NavDropdown label="What We Do" links={whatWeDoLinks} isWhiteText={false} />
+              <NavDropdown label="Our Impact" links={ourImpactLinks} isWhiteText={false} />
               <a
                 href="#donate"
-                className="bg-[#a0522d] hover:bg-[#8b4726] text-white px-6 py-2.5 text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+                className="bg-terracotta hover:bg-terracotta-dark text-primary-foreground px-6 py-2.5 text-sm uppercase tracking-[0.15em] font-medium transition-colors"
               >
                 Donate
               </a>
@@ -174,8 +203,8 @@ const Header = () => {
             onClick={() => setIsOpen(!isOpen)}
             className={`lg:hidden p-2 rounded-lg ml-auto ${
               isScrolled
-                ? "text-[#420d09] hover:bg-[#420d09]/10"
-                : "text-white hover:bg-white/10"
+                ? "text-foreground hover:bg-muted"
+                : "text-hero-text hover:bg-white/10"
             }`}
             aria-label="Toggle menu"
           >
@@ -192,21 +221,35 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className={`lg:hidden overflow-hidden ${
-              isScrolled ? "bg-white" : "bg-black/95 backdrop-blur-sm"
+              isScrolled ? "bg-background" : "bg-black/95 backdrop-blur-sm"
             }`}
           >
             <nav className="container-wide py-6 flex flex-col gap-1">
-              {/* About Us with sub-links */}
-              <MobileNavSection title="About Us" links={aboutLinks} isScrolled={isScrolled} setIsOpen={setIsOpen} />
-              <MobileNavSection title="What We Do" links={whatWeDoLinks} isScrolled={isScrolled} setIsOpen={setIsOpen} />
-              <MobileNavSection title="Our Impact" links={ourImpactLinks} isScrolled={isScrolled} setIsOpen={setIsOpen} />
+              <MobileNavSection
+                title="About Us"
+                links={aboutLinks}
+                isScrolled={isScrolled}
+                setIsOpen={setIsOpen}
+              />
+              <MobileNavSection
+                title="What We Do"
+                links={whatWeDoLinks}
+                isScrolled={isScrolled}
+                setIsOpen={setIsOpen}
+              />
+              <MobileNavSection
+                title="Our Impact"
+                links={ourImpactLinks}
+                isScrolled={isScrolled}
+                setIsOpen={setIsOpen}
+              />
               <a
                 href="#donate"
                 onClick={() => setIsOpen(false)}
                 className={`px-4 py-3 text-sm uppercase tracking-[0.15em] font-medium transition-colors ${
                   isScrolled
-                    ? "text-[#420d09] hover:bg-[#420d09]/5"
-                    : "text-white/90 hover:text-white hover:bg-white/5"
+                    ? "text-foreground hover:bg-muted"
+                    : "text-hero-text/90 hover:text-hero-text hover:bg-white/5"
                 }`}
               >
                 Donate
@@ -234,7 +277,7 @@ const MobileNavSection = ({
   <div className="px-4 py-2">
     <span
       className={`text-sm uppercase tracking-[0.15em] font-medium ${
-        isScrolled ? "text-[#420d09]" : "text-white/90"
+        isScrolled ? "text-foreground" : "text-hero-text/90"
       }`}
     >
       {title}
@@ -247,8 +290,8 @@ const MobileNavSection = ({
           onClick={() => setIsOpen(false)}
           className={`py-2 text-sm tracking-wide transition-colors ${
             isScrolled
-              ? "text-[#420d09]/80 hover:text-[#420d09]"
-              : "text-white/70 hover:text-white"
+              ? "text-foreground/80 hover:text-foreground"
+              : "text-hero-text/70 hover:text-hero-text"
           }`}
         >
           {link.label}

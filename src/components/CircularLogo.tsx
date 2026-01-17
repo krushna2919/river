@@ -108,7 +108,6 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
         style={{ 
           width: size * 0.55, 
           height: size * 0.55,
-          filter: 'invert(1) sepia(1) saturate(0) brightness(2) contrast(1)',
         }}
       />
     </div>

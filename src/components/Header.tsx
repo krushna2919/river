@@ -28,7 +28,7 @@ const Header = () => {
 
           {/* Center Logo */}
           <a href="#home" className="absolute left-1/2 -translate-x-1/2 hover:scale-105 transition-transform">
-            <CircularLogo size={70} />
+            <CircularLogo size={100} />
           </a>
 
           {/* Right Navigation */}

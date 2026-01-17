@@ -24,15 +24,15 @@ const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="container-wide relative z-10 text-center px-4">
-        {/* Circular Logo with Bird */}
+      <div className="container-wide relative z-10 text-center px-4 -mt-20">
+        {/* Circular Logo with Bird - positioned higher */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="mb-8 flex justify-center"
+          className="mb-6 flex justify-center"
         >
-          <CircularLogo size={180} />
+          <CircularLogo size={160} />
         </motion.div>
 
         <motion.h1

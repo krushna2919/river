@@ -72,20 +72,19 @@ const Header = () => {
           <DropdownMenuItem key={link.href} asChild className="p-0 focus:bg-gray-50">
             <a
               href={link.href}
-              className={`flex items-center justify-between w-full px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors ${
+              className={`group flex items-center justify-between w-full px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors text-[#333] hover:text-[#a0522d] ${
                 index !== links.length - 1 ? "border-b border-gray-200" : ""
-              } ${isScrolled ? "text-[#a0522d]" : "text-[#333]"}`}
+              }`}
             >
               <span className="text-base font-normal">{link.label}</span>
-              {isScrolled ? (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#a0522d]">
-                  <path d="M5 12H19M19 12L13 6M19 12L13 18" />
-                </svg>
-              ) : (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              )}
+              {/* Diagonal arrow - shown by default, hidden on hover */}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 group-hover:hidden">
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+              {/* Horizontal arrow - hidden by default, shown on hover */}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#a0522d] hidden group-hover:block">
+                <path d="M5 12H19M19 12L13 6M19 12L13 18" />
+              </svg>
             </a>
           </DropdownMenuItem>
         ))}

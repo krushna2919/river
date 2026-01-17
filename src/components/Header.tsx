@@ -2,62 +2,61 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Programs", href: "#programs" },
-  { label: "Impact", href: "#impact" },
-  { label: "Partnerships", href: "#partnerships" },
-  { label: "Get Involved", href: "#contact" },
-];
-
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 gradient-hero">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
       <div className="container-wide">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-3">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary-foreground/10 flex items-center justify-center">
-              <span className="font-heading text-primary-foreground text-lg md:text-xl font-bold">RV</span>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-primary-foreground font-heading font-semibold text-lg md:text-xl leading-tight">
-                Rishi Valley
-              </h1>
-              <p className="text-primary-foreground/80 text-xs md:text-sm">
-                Rural Education Centre
-              </p>
-            </div>
-          </a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="px-4 py-2 text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10 rounded-lg transition-colors text-sm font-medium"
-              >
-                {item.label}
-              </a>
-            ))}
+        <div className="flex items-center justify-between h-20 md:h-24">
+          {/* Left Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <a
+              href="#about"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+            >
+              About Us
+            </a>
+            <a
+              href="#methodology"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+            >
+              What We Do
+            </a>
           </nav>
 
-          {/* CTA Button - Desktop */}
-          <a
-            href="#contact"
-            className="hidden lg:block px-5 py-2.5 bg-primary-foreground text-primary rounded-lg font-medium text-sm hover:bg-primary-foreground/90 transition-colors"
-          >
-            Support Us
+          {/* Center Logo */}
+          <a href="#home" className="absolute left-1/2 -translate-x-1/2">
+            <div className="text-center">
+              <div className="w-12 h-12 md:w-14 md:h-14 mx-auto rounded-full border-2 border-white/30 flex items-center justify-center mb-1">
+                <span className="font-heading text-white text-xl md:text-2xl font-medium">RV</span>
+              </div>
+              <span className="hidden md:block text-white/80 text-[10px] uppercase tracking-[0.2em]">
+                REC
+              </span>
+            </div>
           </a>
+
+          {/* Right Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <a
+              href="#impact"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+            >
+              Our Impact
+            </a>
+            <a
+              href="#donate"
+              className="text-white/90 hover:text-white text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+            >
+              Donate
+            </a>
+          </nav>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-primary-foreground hover:bg-primary-foreground/10 rounded-lg"
+            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg ml-auto"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -72,26 +71,24 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-primary overflow-hidden"
+            className="lg:hidden bg-black/95 backdrop-blur-sm overflow-hidden"
           >
-            <nav className="container-wide py-4 flex flex-col gap-1">
-              {navItems.map((item) => (
+            <nav className="container-wide py-6 flex flex-col gap-1">
+              {[
+                { label: "About Us", href: "#about" },
+                { label: "What We Do", href: "#methodology" },
+                { label: "Our Impact", href: "#impact" },
+                { label: "Donate", href: "#donate" },
+              ].map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-3 text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10 rounded-lg transition-colors font-medium"
+                  className="px-4 py-3 text-white/90 hover:text-white hover:bg-white/5 text-sm uppercase tracking-[0.15em] font-medium transition-colors"
                 >
                   {item.label}
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="mt-2 px-4 py-3 bg-primary-foreground text-primary rounded-lg font-medium text-center"
-              >
-                Support Us
-              </a>
             </nav>
           </motion.div>
         )}

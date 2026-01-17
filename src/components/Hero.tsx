@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import CircularLogo from "./CircularLogo";
 
 const Hero = () => {
   return (
@@ -24,17 +23,7 @@ const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="container-wide relative z-10 text-center px-4 -mt-20">
-        {/* Circular Logo with Bird - positioned higher */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-6 flex justify-center"
-        >
-          <CircularLogo size={160} />
-        </motion.div>
-
+      <div className="container-wide relative z-10 text-center px-4">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

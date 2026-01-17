@@ -7,9 +7,9 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent pt-4">
       <div className="container-wide">
-        <div className="flex items-center justify-between h-36 md:h-40">
+        <div className="flex items-center justify-between h-24 md:h-28">
           {/* Left Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             <a
@@ -27,8 +27,8 @@ const Header = () => {
           </nav>
 
           {/* Center Logo */}
-          <a href="#home" className="absolute left-1/2 -translate-x-1/2 hover:scale-105 transition-transform">
-            <CircularLogo size={180} />
+          <a href="#home" className="absolute left-1/2 -translate-x-1/2 -translate-y-2 hover:scale-105 transition-transform">
+            <CircularLogo size={160} />
           </a>
 
           {/* Right Navigation */}

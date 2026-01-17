@@ -1,4 +1,4 @@
-import hoopoe from "@/assets/hoopoe-bird.svg";
+import hoopoe from "@/assets/hoopoe-bird-transparent.png";
 
 const CircularLogo = ({ size = 200 }: { size?: number }) => {
   const radius = size / 2;
@@ -6,7 +6,7 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
   
   return (
     <div 
-      className="relative isolate flex items-center justify-center"
+      className="relative flex items-center justify-center"
       style={{ width: size, height: size }}
     >
       {/* SVG for circular text */}
@@ -24,16 +24,16 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
             d={`M ${radius - textRadius}, ${radius} A ${textRadius},${textRadius} 0 0,1 ${radius + textRadius},${radius}`}
             fill="none"
           />
-          {/* Bottom arc for "RURAL EDUCATION CENTRE" */}
+          {/* Bottom arc for "RURAL EDUCATION CENTRE" (readable from bottom) */}
           <path
             id="bottomArc"
-            d={`M ${radius + textRadius}, ${radius} A ${textRadius},${textRadius} 0 0,1 ${radius - textRadius},${radius}`}
+            d={`M ${radius - textRadius}, ${radius} A ${textRadius},${textRadius} 0 0,0 ${radius + textRadius},${radius}`}
             fill="none"
           />
-          {/* Inner bottom arc for "KRISHNAMURTI FOUNDATION INDIA" */}
+          {/* Inner bottom arc for "KRISHNAMURTI FOUNDATION INDIA" (readable from bottom) */}
           <path
             id="innerBottomArc"
-            d={`M ${radius + textRadius - 20}, ${radius + 10} A ${textRadius - 20},${textRadius - 20} 0 0,1 ${radius - textRadius + 20},${radius + 10}`}
+            d={`M ${radius - textRadius + 20}, ${radius + 10} A ${textRadius - 20},${textRadius - 20} 0 0,0 ${radius + textRadius - 20},${radius + 10}`}
             fill="none"
           />
         </defs>
@@ -104,7 +104,7 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
       <img 
         src={hoopoe} 
         alt="Hoopoe Bird - Rishi Valley Logo" 
-        className="relative z-10 object-contain text-[#5C3D2E]"
+        className="relative z-10 object-contain mix-blend-multiply"
         style={{ 
           width: size * 0.55, 
           height: size * 0.55,

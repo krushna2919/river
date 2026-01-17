@@ -40,11 +40,11 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
         
         {/* Top text - RISHI VALLEY */}
         <text 
-          fill="rgba(255,255,255,0.9)" 
-          fontSize={size * 0.075}
+          fill="rgba(255,255,255,0.95)" 
+          fontSize={size * 0.09}
           fontFamily="'Cormorant Garamond', serif"
-          letterSpacing="0.15em"
-          fontWeight="600"
+          letterSpacing="0.2em"
+          fontWeight="500"
         >
           <textPath 
             href="#topArc" 
@@ -58,10 +58,10 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
         {/* Bottom text - RURAL EDUCATION CENTRE */}
         <text 
           fill="rgba(255,255,255,0.9)" 
-          fontSize={size * 0.055}
+          fontSize={size * 0.048}
           fontFamily="'Cormorant Garamond', serif"
-          letterSpacing="0.1em"
-          fontWeight="500"
+          letterSpacing="0.18em"
+          fontWeight="400"
         >
           <textPath 
             href="#bottomArc" 
@@ -74,10 +74,10 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
         
         {/* Inner bottom text - KRISHNAMURTI FOUNDATION INDIA */}
         <text 
-          fill="rgba(255,255,255,0.7)" 
-          fontSize={size * 0.04}
+          fill="rgba(255,255,255,0.75)" 
+          fontSize={size * 0.032}
           fontFamily="'Cormorant Garamond', serif"
-          letterSpacing="0.05em"
+          letterSpacing="0.12em"
           fontWeight="400"
         >
           <textPath 

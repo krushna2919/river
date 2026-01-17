@@ -1,4 +1,4 @@
-import hoopoe from "@/assets/hoopoe-bird.png";
+import hoopoe from "@/assets/hoopoe-bird-clean.png";
 
 const CircularLogo = ({ size = 200 }: { size?: number }) => {
   const radius = size / 2;
@@ -6,7 +6,7 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
   
   return (
     <div 
-      className="relative flex items-center justify-center"
+      className="relative isolate flex items-center justify-center"
       style={{ width: size, height: size }}
     >
       {/* SVG for circular text */}
@@ -104,7 +104,7 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
       <img 
         src={hoopoe} 
         alt="Hoopoe Bird - Rishi Valley Logo" 
-        className="relative z-10 object-contain"
+        className="relative z-10 object-contain mix-blend-multiply"
         style={{ 
           width: size * 0.55, 
           height: size * 0.55,

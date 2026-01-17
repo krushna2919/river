@@ -25,17 +25,8 @@ const Header = () => {
             </a>
           </nav>
 
-          {/* Center Logo */}
-          <a href="#home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="text-center">
-              <div className="w-12 h-12 md:w-14 md:h-14 mx-auto rounded-full border-2 border-white/30 flex items-center justify-center mb-1">
-                <span className="font-heading text-white text-xl md:text-2xl font-medium">RV</span>
-              </div>
-              <span className="hidden md:block text-white/80 text-[10px] uppercase tracking-[0.2em]">
-                REC
-              </span>
-            </div>
-          </a>
+          {/* Empty center space for balance */}
+          <div className="absolute left-1/2 -translate-x-1/2 w-14 h-14" />
 
           {/* Right Navigation */}
           <nav className="hidden lg:flex items-center gap-8">

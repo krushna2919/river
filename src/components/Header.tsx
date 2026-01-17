@@ -76,52 +76,44 @@ const Header = () => {
               <DropdownMenuItem
                 key={link.href}
                 asChild
-                className={`p-0 focus:bg-transparent rounded-none ${
+                className={`group p-0 focus:bg-transparent rounded-none ${
                   index !== links.length - 1 ? "border-b border-border" : ""
                 }`}
               >
                 <a
                   href={link.href}
-                  className="flex items-center justify-between w-full px-6 py-4 cursor-pointer transition-colors hover:bg-muted/50"
+                  className="flex items-center justify-between w-full px-6 py-4 cursor-pointer transition-colors"
                 >
-                  {/* First item: terracotta + horizontal arrow. Others: dark + diagonal arrow */}
-                  <span
-                    className={`text-base font-normal ${
-                      index === 0 ? "text-terracotta" : "text-foreground"
-                    }`}
-                  >
+                  {/* Dark by default, terracotta on hover */}
+                  <span className="text-base font-normal text-foreground group-hover:text-terracotta transition-colors">
                     {link.label}
                   </span>
 
-                  {index === 0 ? (
-                    /* Horizontal arrow for first item */
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="text-terracotta"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12H19M19 12L13 6M19 12L13 18" />
-                    </svg>
-                  ) : (
-                    /* Diagonal arrow for other items */
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="text-muted-foreground"
-                      aria-hidden="true"
-                    >
-                      <path d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  )}
+                  {/* Diagonal arrow by default, horizontal arrow on hover */}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="text-muted-foreground group-hover:hidden"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="hidden text-terracotta group-hover:block"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12H19M19 12L13 6M19 12L13 18" />
+                  </svg>
                 </a>
               </DropdownMenuItem>
             ))}

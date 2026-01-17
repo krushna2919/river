@@ -3,8 +3,8 @@ import hoopoe from "@/assets/hoopoe-bird-transparent.png";
 const CircularLogo = ({ size = 200 }: { size?: number }) => {
   const radius = size / 2;
   const outerTextRadius = radius - 12;
-  const bottomTextRadius = radius - 10;
-  const innerTextRadius = radius - 22;
+  const bottomTextRadius = radius - 14;
+  const innerTextRadius = radius - 26;
   
   return (
     <div 
@@ -29,13 +29,13 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
           {/* Bottom arc for "RURAL EDUCATION CENTRE" (readable from bottom) */}
           <path
             id="bottomArc"
-            d={`M ${radius - bottomTextRadius + 5}, ${radius + 2} A ${bottomTextRadius},${bottomTextRadius} 0 0,0 ${radius + bottomTextRadius - 5},${radius + 2}`}
+            d={`M ${radius - bottomTextRadius}, ${radius} A ${bottomTextRadius},${bottomTextRadius} 0 0,0 ${radius + bottomTextRadius},${radius}`}
             fill="none"
           />
           {/* Inner bottom arc for "KRISHNAMURTI FOUNDATION INDIA" (readable from bottom) */}
           <path
             id="innerBottomArc"
-            d={`M ${radius - innerTextRadius + 8}, ${radius + 6} A ${innerTextRadius},${innerTextRadius} 0 0,0 ${radius + innerTextRadius - 8},${radius + 6}`}
+            d={`M ${radius - innerTextRadius}, ${radius} A ${innerTextRadius},${innerTextRadius} 0 0,0 ${radius + innerTextRadius},${radius}`}
             fill="none"
           />
         </defs>

@@ -2,7 +2,9 @@ import hoopoe from "@/assets/hoopoe-bird-transparent.png";
 
 const CircularLogo = ({ size = 200 }: { size?: number }) => {
   const radius = size / 2;
-  const textRadius = radius - 15;
+  const outerTextRadius = radius - 12;
+  const bottomTextRadius = radius - 10;
+  const innerTextRadius = radius - 22;
   
   return (
     <div 
@@ -21,19 +23,19 @@ const CircularLogo = ({ size = 200 }: { size?: number }) => {
           {/* Top arc for "RISHI VALLEY" */}
           <path
             id="topArc"
-            d={`M ${radius - textRadius}, ${radius} A ${textRadius},${textRadius} 0 0,1 ${radius + textRadius},${radius}`}
+            d={`M ${radius - outerTextRadius}, ${radius} A ${outerTextRadius},${outerTextRadius} 0 0,1 ${radius + outerTextRadius},${radius}`}
             fill="none"
           />
           {/* Bottom arc for "RURAL EDUCATION CENTRE" (readable from bottom) */}
           <path
             id="bottomArc"
-            d={`M ${radius - textRadius}, ${radius} A ${textRadius},${textRadius} 0 0,0 ${radius + textRadius},${radius}`}
+            d={`M ${radius - bottomTextRadius + 5}, ${radius + 2} A ${bottomTextRadius},${bottomTextRadius} 0 0,0 ${radius + bottomTextRadius - 5},${radius + 2}`}
             fill="none"
           />
           {/* Inner bottom arc for "KRISHNAMURTI FOUNDATION INDIA" (readable from bottom) */}
           <path
             id="innerBottomArc"
-            d={`M ${radius - textRadius + 20}, ${radius + 10} A ${textRadius - 20},${textRadius - 20} 0 0,0 ${radius + textRadius - 20},${radius + 10}`}
+            d={`M ${radius - innerTextRadius + 8}, ${radius + 6} A ${innerTextRadius},${innerTextRadius} 0 0,0 ${radius + innerTextRadius - 8},${radius + 6}`}
             fill="none"
           />
         </defs>

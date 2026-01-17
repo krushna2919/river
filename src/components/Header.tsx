@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
       <div className="container-wide">
-        <div className="flex items-center justify-between h-20 md:h-24">
+        <div className="flex items-center justify-between h-36 md:h-40">
           {/* Left Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             <a
@@ -28,7 +28,7 @@ const Header = () => {
 
           {/* Center Logo */}
           <a href="#home" className="absolute left-1/2 -translate-x-1/2 hover:scale-105 transition-transform">
-            <CircularLogo size={100} />
+            <CircularLogo size={180} />
           </a>
 
           {/* Right Navigation */}

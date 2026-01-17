@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import CircularLogo from "./CircularLogo";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,8 +26,10 @@ const Header = () => {
             </a>
           </nav>
 
-          {/* Empty center space for balance */}
-          <div className="absolute left-1/2 -translate-x-1/2 w-14 h-14" />
+          {/* Center Logo */}
+          <a href="#home" className="absolute left-1/2 -translate-x-1/2 hover:scale-105 transition-transform">
+            <CircularLogo size={70} />
+          </a>
 
           {/* Right Navigation */}
           <nav className="hidden lg:flex items-center gap-8">

@@ -74,10 +74,10 @@ const Header = () => {
               href={link.href}
               className={`flex items-center justify-between w-full px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors ${
                 index !== links.length - 1 ? "border-b border-gray-200" : ""
-              } ${isScrolled && index === 0 ? "text-[#a0522d]" : "text-[#333]"}`}
+              } ${isScrolled ? "text-[#a0522d]" : "text-[#333]"}`}
             >
               <span className="text-base font-normal">{link.label}</span>
-              {isScrolled && index === 0 ? (
+              {isScrolled ? (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#a0522d]">
                   <path d="M5 12H19M19 12L13 6M19 12L13 18" />
                 </svg>

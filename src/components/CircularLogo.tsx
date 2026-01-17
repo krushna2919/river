@@ -1,4 +1,4 @@
-import hoopoe from "@/assets/hoopoe-bird-transparent.png";
+import hoopoe from "@/assets/hoopoe-logo.png";
 
 const CircularLogo = ({ size = 200 }: { size?: number }) => {
   const radius = size / 2;

@@ -6,24 +6,27 @@ import heroImage from "@/assets/rishi-valley-school-hero.png";
 const RishiValleySchool = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header isInnerPage />
       
-      {/* Hero Section */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <div className="absolute inset-0">
+      {/* Hero Image Section */}
+      <section className="pt-20">
+        <div className="w-full">
           <img
             src={heroImage}
             alt="Rishi Valley School outdoor learning"
-            className="w-full h-full object-cover"
+            className="w-full h-[50vh] md:h-[60vh] object-cover"
           />
-          <div className="absolute inset-0 bg-black/40" />
         </div>
-        <div className="relative h-full flex items-center justify-center">
+      </section>
+
+      {/* Title Section - Below Image */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="container-wide max-w-4xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-serif text-white text-center px-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground text-center"
           >
             Rishi Valley School
           </motion.h1>

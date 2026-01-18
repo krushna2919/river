@@ -10,7 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const Header = () => {
+interface HeaderProps {
+  isInnerPage?: boolean;
+}
+
+const Header = ({ isInnerPage = false }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -19,6 +23,9 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // For inner pages, always show compact header style
+  const showCompactHeader = isInnerPage || isScrolled;
 
   const aboutLinks = [
     { label: "Our Story", href: "#story" },
@@ -126,27 +133,27 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible ${
-        isScrolled ? "bg-background shadow-md py-2" : "bg-transparent pt-6"
+        showCompactHeader ? "bg-background shadow-md py-2" : "bg-transparent pt-6"
       }`}
     >
       <div className="container-wide">
         <div
           className={`relative flex items-center justify-between transition-all duration-300 ${
-            isScrolled ? "h-16" : "h-24 md:h-28"
+            showCompactHeader ? "h-16" : "h-24 md:h-28"
           }`}
         >
-          {/* Left Navigation (shown when not scrolled) */}
-          {!isScrolled && (
+          {/* Left Navigation (shown when not compact) */}
+          {!showCompactHeader && (
             <nav className="hidden lg:flex items-center gap-8">
               <NavDropdown label="About Us" links={aboutLinks} isWhiteText />
               <NavDropdown label="What We Do" links={whatWeDoLinks} isWhiteText />
             </nav>
           )}
 
-          {/* Center Logo (large, when not scrolled) */}
-          {!isScrolled && (
+          {/* Center Logo (large, when not compact) */}
+          {!showCompactHeader && (
             <a
-              href="#home"
+              href="/"
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hover:scale-105 transition-transform"
               aria-label="Home"
             >
@@ -154,10 +161,10 @@ const Header = () => {
             </a>
           )}
 
-          {/* Left Logo (compact, when scrolled) */}
-          {isScrolled && (
+          {/* Left Logo (compact style) */}
+          {showCompactHeader && (
             <a
-              href="#home"
+              href="/"
               className="hover:opacity-80 transition-opacity"
               aria-label="Home"
             >
@@ -169,8 +176,8 @@ const Header = () => {
             </a>
           )}
 
-          {/* Right Navigation (shown when not scrolled) */}
-          {!isScrolled && (
+          {/* Right Navigation (shown when not compact) */}
+          {!showCompactHeader && (
             <nav className="hidden lg:flex items-center gap-8">
               <NavDropdown label="Our Impact" links={ourImpactLinks} isWhiteText />
               <a
@@ -182,8 +189,8 @@ const Header = () => {
             </nav>
           )}
 
-          {/* Scrolled Navigation (right side) */}
-          {isScrolled && (
+          {/* Compact Navigation (right side) */}
+          {showCompactHeader && (
             <nav className="hidden lg:flex items-center gap-8">
               <NavDropdown label="About Us" links={aboutLinks} isWhiteText={false} />
               <NavDropdown label="What We Do" links={whatWeDoLinks} isWhiteText={false} />
@@ -201,7 +208,7 @@ const Header = () => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`lg:hidden p-2 rounded-lg ml-auto ${
-              isScrolled
+              showCompactHeader
                 ? "text-foreground hover:bg-muted"
                 : "text-hero-text hover:bg-white/10"
             }`}
@@ -220,33 +227,33 @@ const Header = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className={`lg:hidden overflow-hidden ${
-              isScrolled ? "bg-background" : "bg-black/95 backdrop-blur-sm"
+              showCompactHeader ? "bg-background" : "bg-black/95 backdrop-blur-sm"
             }`}
           >
             <nav className="container-wide py-6 flex flex-col gap-1">
               <MobileNavSection
                 title="About Us"
                 links={aboutLinks}
-                isScrolled={isScrolled}
+                isScrolled={showCompactHeader}
                 setIsOpen={setIsOpen}
               />
               <MobileNavSection
                 title="What We Do"
                 links={whatWeDoLinks}
-                isScrolled={isScrolled}
+                isScrolled={showCompactHeader}
                 setIsOpen={setIsOpen}
               />
               <MobileNavSection
                 title="Our Impact"
                 links={ourImpactLinks}
-                isScrolled={isScrolled}
+                isScrolled={showCompactHeader}
                 setIsOpen={setIsOpen}
               />
               <a
                 href="#donate"
                 onClick={() => setIsOpen(false)}
                 className={`px-4 py-3 text-sm uppercase tracking-[0.15em] font-medium transition-colors ${
-                  isScrolled
+                  showCompactHeader
                     ? "text-foreground hover:bg-muted"
                     : "text-hero-text/90 hover:text-hero-text hover:bg-white/5"
                 }`}

@@ -8,28 +8,64 @@ const RishiValleySchool = () => {
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
       
-      {/* Hero Image Section */}
-      <section className="pt-20">
-        <div className="w-full">
+      {/* Hero Section - Header structure */}
+      <section className="pt-24 md:pt-28 pb-8 bg-background">
+        <div className="container-wide max-w-4xl mx-auto">
+          {/* ABOUT US Label */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-terracotta font-semibold uppercase tracking-wider text-sm mb-4"
+          >
+            About Us
+          </motion.p>
+          
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-8"
+          >
+            Rishi Valley School
+          </motion.h1>
+        </div>
+        
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full"
+        >
           <img
             src={heroImage}
             alt="Rishi Valley School outdoor learning"
             className="w-full h-[50vh] md:h-[60vh] object-cover"
           />
-        </div>
-      </section>
-
-      {/* Title Section - Below Image */}
-      <section className="py-12 md:py-16 bg-background">
-        <div className="container-wide max-w-4xl mx-auto">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+        </motion.div>
+        
+        {/* Image Description in Italics */}
+        <div className="container-wide max-w-4xl mx-auto mt-6">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground text-center"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-muted-foreground italic text-base md:text-lg"
           >
-            Rishi Valley School
-          </motion.h1>
+            Education at Rishi Valley School focuses on peaceful coexistence with nature and its flora and fauna.
+          </motion.p>
+          
+          {/* J. Krishnamurti Quote */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-lg md:text-xl text-foreground leading-relaxed mt-8 font-medium"
+          >
+            Rishi Valley School strives to incorporate J. Krishnamurti's thought-provoking educational vision in its daily learning practices.
+          </motion.p>
         </div>
       </section>
 

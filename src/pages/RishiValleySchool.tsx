@@ -34,13 +34,23 @@ const RishiValleySchool = () => {
           >
             Rishi Valley School
           </motion.h1>
+          
+          {/* Founding Paragraph - Centered */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-muted-foreground leading-relaxed mb-10"
+          >
+            The Rishi Valley School was founded in 1926 by J. Krishnamurti, widely considered one of the twentieth century's greatest philosophical and spiritual luminaries. The school functions under the aegis of the Rishi Valley Education Centre (RVEC), an initiative of the Krishnamurti Foundation India.
+          </motion.p>
         </div>
         
         {/* Image - Centered with enlarge button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           className="container-wide max-w-4xl mx-auto"
         >
           <div className="relative group">
@@ -61,24 +71,14 @@ const RishiValleySchool = () => {
         </motion.div>
         
         {/* Image Description in Italics */}
-        <div className="container-wide max-w-4xl mx-auto mt-6">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-muted-foreground italic text-base md:text-lg"
-          >
-            Education at Rishi Valley School focuses on peaceful coexistence with nature and its flora and fauna.
-          </motion.p>
-          
-          {/* J. Krishnamurti Quote */}
+        <div className="container-wide max-w-4xl mx-auto mt-6 text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-xl text-foreground leading-relaxed mt-8 font-medium"
+            className="text-muted-foreground italic text-base md:text-lg"
           >
-            Rishi Valley School strives to incorporate J. Krishnamurti's thought-provoking educational vision in its daily learning practices.
+            Education at Rishi Valley School focuses on peaceful coexistence with nature and its flora and fauna.
           </motion.p>
         </div>
       </section>

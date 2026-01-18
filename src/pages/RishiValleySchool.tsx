@@ -1,9 +1,13 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Maximize2, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/rishi-valley-school-hero.png";
 
 const RishiValleySchool = () => {
+  const [isImageEnlarged, setIsImageEnlarged] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
@@ -32,18 +36,28 @@ const RishiValleySchool = () => {
           </motion.h1>
         </div>
         
-        {/* Image */}
+        {/* Image - Centered with enlarge button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full"
+          className="container-wide max-w-4xl mx-auto"
         >
-          <img
-            src={heroImage}
-            alt="Rishi Valley School outdoor learning"
-            className="w-full h-[50vh] md:h-[60vh] object-cover"
-          />
+          <div className="relative group">
+            <img
+              src={heroImage}
+              alt="Rishi Valley School outdoor learning"
+              className="w-full h-auto rounded-lg object-cover"
+            />
+            {/* Enlarge Button */}
+            <button
+              onClick={() => setIsImageEnlarged(true)}
+              className="absolute bottom-4 right-4 bg-terracotta hover:bg-terracotta/90 text-white p-2 rounded-md transition-all opacity-80 group-hover:opacity-100"
+              aria-label="Enlarge image"
+            >
+              <Maximize2 size={20} />
+            </button>
+          </div>
         </motion.div>
         
         {/* Image Description in Italics */}
@@ -68,6 +82,35 @@ const RishiValleySchool = () => {
           </motion.p>
         </div>
       </section>
+
+      {/* Enlarged Image Modal */}
+      <AnimatePresence>
+        {isImageEnlarged && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            onClick={() => setIsImageEnlarged(false)}
+          >
+            <button
+              onClick={() => setIsImageEnlarged(false)}
+              className="absolute top-6 right-6 bg-terracotta hover:bg-terracotta/90 text-white p-2 rounded-md transition-all"
+              aria-label="Close enlarged image"
+            >
+              <X size={24} />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              src={heroImage}
+              alt="Rishi Valley School outdoor learning - enlarged"
+              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Content Section */}
       <section className="py-16 md:py-24 bg-background">

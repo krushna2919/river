@@ -8,7 +8,7 @@ const OurStory = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-20 md:py-32 bg-white" ref={ref}>
+    <section id="story" className="py-20 md:py-32 bg-white" ref={ref}>
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image */}

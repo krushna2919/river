@@ -14,7 +14,7 @@ const RishiValleySchool = () => {
       
       {/* Hero Section - Header structure */}
       <section className="pt-24 md:pt-28 pb-8 bg-background">
-        <div className="container-wide max-w-4xl mx-auto">
+        <div className="container-wide max-w-4xl mx-auto text-center">
           {/* ABOUT US Label */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}

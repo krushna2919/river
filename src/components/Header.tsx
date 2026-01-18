@@ -22,7 +22,7 @@ const Header = () => {
 
   const aboutLinks = [
     { label: "Our Story", href: "#story" },
-    { label: "Rishi Valley School", href: "#school" },
+    { label: "Rishi Valley School", href: "/rishi-valley-school" },
     { label: "Our Team", href: "#team" },
     { label: "Contact Us", href: "#contact" },
   ];

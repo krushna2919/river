@@ -28,14 +28,14 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
   const showCompactHeader = isInnerPage || isScrolled;
 
   const aboutLinks = [
-    { label: "Our Story", href: "#story" },
+    { label: "Our Story", href: "/about-us" },
     { label: "Rishi Valley School", href: "/rishi-valley-school" },
     { label: "Our Team", href: "#team" },
     { label: "Contact Us", href: "#contact" },
   ];
 
   const whatWeDoLinks = [
-    { label: "Our Methodology", href: "#methodology" },
+    { label: "Methodology", href: "/what-we-do" },
     { label: "Programs", href: "#programs" },
     { label: "Schools", href: "#schools" },
     { label: "Partnerships", href: "#partnerships" },

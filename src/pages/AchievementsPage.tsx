@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { X } from "lucide-react";
+import { Link } from "react-router-dom";
 import achievementsHero from "@/assets/achievements-hero.jpg";
 import academicImg from "@/assets/achievements-academic.png";
 import confidenceImg from "@/assets/achievements-confidence.png";
@@ -10,6 +13,25 @@ import teacherImg from "@/assets/achievements-teacher.png";
 import localisationImg from "@/assets/achievements-localisation.png";
 import policyImg from "@/assets/achievements-policy.jpg";
 import recognitionImg from "@/assets/achievements-recognition.png";
+import gallery1 from "@/assets/methodology-gallery-1.jpg";
+import gallery2 from "@/assets/methodology-gallery-2.jpg";
+import gallery3 from "@/assets/methodology-gallery-3.jpg";
+import gallery4 from "@/assets/river-gallery-4.jpg";
+import gallery5 from "@/assets/river-gallery-3.jpg";
+import gallery6 from "@/assets/river-gallery-2.jpg";
+import gallery7 from "@/assets/river-gallery-1.jpg";
+import gallery8 from "@/assets/methodology-gallery-4.jpg";
+
+const galleryItems = [
+  { src: gallery1, caption: "Breaks ensure students recharge and connect with nature, fostering a balanced and joyful learning environment." },
+  { src: gallery2, caption: "Connecting with local wisdom: Students listen to a cowherd, blending traditional knowledge into their everyday learning." },
+  { src: gallery3, caption: "Celebrating heritage through puppetry: Girl students discover culture and learning with joy." },
+  { src: gallery4, caption: "Balancing fun and learning: Children take a break, bonding with pet dogs, fostering empathy and responsibility." },
+  { src: gallery5, caption: "Transformative education: RIVER students are benefited by the holistic and inclusive MGML learning approach." },
+  { src: gallery6, caption: "Hands-on arithmetic: Mastering concepts through tactile learning with the help of pebbles." },
+  { src: gallery7, caption: "In MGML learning, children embrace local culture and context through interactive classroom activities." },
+  { src: gallery8, caption: "Nourishing young minds: Nutritious mid-day meals play a significant role in rural education scenarios." },
+];
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -84,6 +106,7 @@ const recognitionPoints = [
 ];
 
 const AchievementsPage = () => {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
   return (
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
@@ -179,6 +202,64 @@ const AchievementsPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Gallery */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container-wide">
+          <motion.h2 {...fadeUp} className="font-heading text-2xl md:text-3xl text-foreground mb-10 text-center">
+            Gallery
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {galleryItems.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="group cursor-pointer"
+                onClick={() => setSelectedImage(index)}
+              >
+                <div className="overflow-hidden rounded-lg">
+                  <img
+                    src={item.src}
+                    alt={item.caption}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed mt-3 italic">{item.caption}</p>
+              </motion.div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link to="/gallery" onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-terracotta font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all">
+              View All
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      {selectedImage !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="absolute top-6 right-6 text-white/80 hover:text-white"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={galleryItems[selectedImage].src}
+            alt={galleryItems[selectedImage].caption}
+            className="max-w-full max-h-[85vh] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
 
       <Footer />
     </div>

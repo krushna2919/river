@@ -129,7 +129,7 @@ const CaseStudies = () => {
           className="text-center mt-10"
         >
           <a
-            href="#"
+            href={activeTab === "case-studies" ? "/case-studies" : "/blog"}
             className="inline-flex items-center gap-2 text-primary font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all"
           >
             View all

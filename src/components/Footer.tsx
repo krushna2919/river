@@ -20,7 +20,7 @@ const Footer = () => {
                 { label: "Contact Us", href: "/contact-us" },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link to={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                  <Link to={link.href} onClick={() => window.scrollTo(0, 0)} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -39,7 +39,7 @@ const Footer = () => {
                 { label: "Services", href: "/services" },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link to={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                  <Link to={link.href} onClick={() => window.scrollTo(0, 0)} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -58,7 +58,7 @@ const Footer = () => {
                 { label: "Testimonials", href: "/testimonials" },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link to={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                  <Link to={link.href} onClick={() => window.scrollTo(0, 0)} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
                   </Link>
                 </li>

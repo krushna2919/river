@@ -10,6 +10,7 @@ import trainingPhoto from "@/assets/services-training-photo.png";
 import modelSchoolImg from "@/assets/services-model-school.png";
 import modelSchoolPhoto from "@/assets/services-model-school-photo.png";
 import rtepImg from "@/assets/services-rtep.png";
+import rtepPhoto from "@/assets/services-rtep-photo.png";
 import puppetryImg from "@/assets/services-puppetry.png";
 import gallery1 from "@/assets/methodology-gallery-1.jpg";
 import gallery2 from "@/assets/methodology-gallery-2.jpg";
@@ -117,21 +118,20 @@ const ServicesPage = () => {
 
         {/* RTEP */}
         <section className="container-wide mb-16 md:mb-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-            <motion.img {...fadeUp} src={rtepImg} alt="Inspiring educators with innovative pedagogy" className="w-full rounded-xl" />
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}>
-              <p className="text-muted-foreground text-sm italic">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <motion.div {...fadeUp}>
+              <img src={rtepPhoto} alt="RTEP educators in discussion" className="w-full rounded-xl" />
+              <p className="text-muted-foreground text-sm italic mt-4">
                 Inspiring educators with innovative pedagogy and best practices.
               </p>
             </motion.div>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <motion.div {...fadeUp} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Rishi Valley Teacher Enrichment Programme (RTEP):</strong> Based on the National Curriculum Framework for Teachers Education (NCFTE) 2009 and National Council for Teachers Education (NCTE) 2014, RTEP (duration: 6 months to a year) blends unique pedagogy with perspectives from great thinkers in education, government requirements, and best practices in teaching from diverse contexts. For a start, 7-day initial training for master-trainers are provided, including a face-to-face workshop and optional online modules. Consistent support is extended over 6 months for queries, doubts, clarifications, and suggestions to improve weekly.
-              </p>
+            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="space-y-6">
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Rishi Valley Teacher Enrichment Programme (RTEP):</strong> Based on the National Curriculum Framework for Teachers Education (NCFTE) 2009 and National Council for Teachers Education (NCTE) 2014, RTEP (duration: 6 months to a year) blends unique pedagogy with perspectives from great thinkers in education, government requirements, and best practices in teaching from diverse contexts. For a start, 7-day initial training for master-trainers are provided, including a face-to-face workshop and optional online modules. Consistent support is extended over 6 months for queries, doubts, clarifications, and suggestions to improve weekly.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>

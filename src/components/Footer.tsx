@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -24,45 +25,58 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* About Us */}
           <div>
-            <h4 className="font-heading font-medium text-lg mb-6">Quick Links</h4>
+            <h4 className="font-heading font-medium text-lg mb-6 uppercase tracking-wider">About Us</h4>
             <ul className="space-y-3">
               {[
-                { label: "About Us", href: "#about" },
-                { label: "What We Do", href: "#methodology" },
-                { label: "Our Impact", href: "#impact" },
-                { label: "Donate", href: "#donate" },
+                { label: "Our Story", href: "/our-story" },
+                { label: "Rishi Valley School", href: "/rishi-valley-school" },
+                { label: "Our Team", href: "/our-team" },
+                { label: "Contact Us", href: "/contact-us" },
               ].map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
-                  >
+                  <Link to={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* What We Do */}
           <div>
-            <h4 className="font-heading font-medium text-lg mb-6">Resources</h4>
+            <h4 className="font-heading font-medium text-lg mb-6 uppercase tracking-wider">What We Do</h4>
             <ul className="space-y-3">
               {[
-                { label: "Methodology", href: "#methodology" },
-                { label: "Case Studies", href: "#" },
-                { label: "Blog", href: "#" },
-                { label: "Contact", href: "#" },
+                { label: "RIVER", href: "/river" },
+                { label: "Methodology", href: "/methodology" },
+                { label: "School in a Box", href: "/school-in-a-box" },
+                { label: "Services", href: "/services" },
               ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
-                  >
+                <li key={link.href}>
+                  <Link to={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
                     {link.label}
-                  </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Our Impact */}
+          <div>
+            <h4 className="font-heading font-medium text-lg mb-6 uppercase tracking-wider">Our Impact</h4>
+            <ul className="space-y-3">
+              {[
+                { label: "Achievements", href: "/achievements" },
+                { label: "Awards & Recognitions", href: "/awards-recognitions" },
+                { label: "Case Studies", href: "/case-studies" },
+                { label: "Testimonials", href: "/testimonials" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-white/60 hover:text-white transition-colors text-sm">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>

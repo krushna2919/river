@@ -8,22 +8,6 @@ const Footer = () => {
     <footer className="bg-[#0a0a0a] text-white">
       <div className="container-wide py-16 md:py-20">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center">
-                <span className="font-heading text-xl font-medium">RV</span>
-              </div>
-              <div>
-                <h3 className="font-heading font-medium text-lg">Rishi Valley</h3>
-                <p className="text-white/60 text-sm">Rural Education Centre</p>
-              </div>
-            </div>
-            <p className="text-white/60 text-sm leading-relaxed">
-              Krishnamurti Foundation India's initiative for revolutionizing 
-              rural education since 1976.
-            </p>
-          </div>
 
           {/* About Us */}
           <div>
@@ -84,7 +68,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-heading font-medium text-lg mb-6">Contact Us</h4>
+            <h4 className="font-heading font-medium text-lg mb-6 uppercase tracking-wider">Contact Us</h4>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />

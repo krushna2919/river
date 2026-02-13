@@ -179,12 +179,6 @@ const RishiValleySchool = () => {
             </p>
           </div>
 
-          {/* Second Nature Image */}
-          <ImageWithEnlarge
-            src={natureImage}
-            alt="Rishi Valley peaceful coexistence"
-            caption="Education at Rishi Valley School focuses on peaceful coexistence with nature and its flora and fauna."
-          />
 
           {/* Health Centre Image */}
           <ImageWithEnlarge

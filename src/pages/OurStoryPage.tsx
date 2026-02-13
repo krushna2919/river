@@ -100,34 +100,37 @@ const ChronologySection = ({
   return (
     <section className="py-16 md:py-24 section-cream">
       <div className="container-wide">
-        <div className="text-center mb-12">
-          <span className="heading-subsection block mb-4">Chronology</span>
-          <h2 className="heading-section text-foreground">Timeline of Achievements</h2>
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <span className="heading-subsection block mb-4">Chronology</span>
+            <h2 className="heading-section text-foreground">Timeline of Achievements</h2>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => scrollByCard("left")}
+              disabled={activeIndex === 0}
+              className="bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} className="text-foreground" />
+            </button>
+            <button
+              onClick={() => scrollByCard("right")}
+              disabled={activeIndex >= chronologyData.length - 1}
+              className="bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} className="text-foreground" />
+            </button>
+          </div>
         </div>
 
         <div className="relative">
-          {/* Navigation buttons */}
-          <button
-            onClick={() => scrollByCard("left")}
-            disabled={activeIndex === 0}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={20} className="text-foreground" />
-          </button>
-          <button
-            onClick={() => scrollByCard("right")}
-            disabled={activeIndex >= chronologyData.length - 1}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={20} className="text-foreground" />
-          </button>
 
           {/* Horizontal scrolling container */}
           <div
             ref={scrollRef}
-            className="overflow-x-auto scrollbar-hide px-10 snap-x snap-mandatory"
+            className="overflow-x-auto scrollbar-hide snap-x snap-mandatory"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             onMouseEnter={() => setIsAutoScrolling(false)}
             onMouseLeave={() => setIsAutoScrolling(true)}

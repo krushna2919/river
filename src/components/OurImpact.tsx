@@ -6,29 +6,25 @@ import { School, Users, Baby, Calendar } from "lucide-react";
 const stats = [
   {
     icon: School,
-    number: "250000",
+    number: "250,000+",
     label: "Schools Covered",
   },
   {
     icon: Users,
-    number: "500000",
+    number: "500,000+",
     label: "Teachers Trained",
   },
   {
     icon: Baby,
-    number: "125000000",
+    number: "125,000,000+",
     label: "Children Impacted",
   },
   {
     icon: Calendar,
-    number: "3300",
+    number: "3,300+",
     label: "Training Days",
   },
 ];
-
-const formatNumber = (num: string) => {
-  return parseInt(num).toLocaleString();
-};
 
 const OurImpact = () => {
   const ref = useRef(null);
@@ -71,7 +67,7 @@ const OurImpact = () => {
                 <stat.icon className="w-10 h-10 md:w-12 md:h-12 text-primary" strokeWidth={1.5} />
               </div>
               <div className="stat-number mb-2">
-                {formatNumber(stat.number)}
+                {stat.number}
               </div>
               <h4 className="text-muted-foreground font-medium text-sm md:text-base uppercase tracking-wider">
                 {stat.label}

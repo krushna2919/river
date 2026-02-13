@@ -38,7 +38,7 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
     { label: "RIVER", href: "/river" },
     { label: "Methodology", href: "/methodology" },
     { label: "School In a Box", href: "/school-in-a-box" },
-    { label: "Services", href: "#services" },
+    { label: "Services", href: "/services" },
   ];
 
   const ourImpactLinks = [

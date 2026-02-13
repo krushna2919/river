@@ -134,7 +134,7 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible ${
-        showCompactHeader ? "bg-background shadow-md py-2" : "bg-transparent pt-6"
+        showCompactHeader ? "bg-background shadow-none py-2 border-b-2 border-primary" : "bg-transparent pt-6"
       }`}
     >
       <div className="container-wide">

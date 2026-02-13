@@ -35,6 +35,7 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
   ];
 
   const whatWeDoLinks = [
+    { label: "RIVER", href: "/river" },
     { label: "Methodology", href: "/what-we-do" },
     { label: "Programs", href: "#programs" },
     { label: "Schools", href: "#schools" },

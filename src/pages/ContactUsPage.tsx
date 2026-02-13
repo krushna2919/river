@@ -19,8 +19,11 @@ const ContactUsPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission logic
-    console.log("Form submitted:", formData);
+    // Basic validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.fullName.trim() || !formData.email.trim()) return;
+    if (!emailRegex.test(formData.email)) return;
+    // Form submission logic — send to backend when ready
   };
 
   const fadeUp = {

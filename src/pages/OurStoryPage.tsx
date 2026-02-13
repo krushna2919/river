@@ -461,7 +461,7 @@ const OurStoryPage = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryData.map((item, index) => (
+            {galleryData.slice(0, 3).map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -476,6 +476,15 @@ const OurStoryPage = () => {
                 />
               </motion.div>
             ))}
+          </div>
+          <div className="text-center mt-10">
+            <a
+              href="/gallery"
+              className="inline-flex items-center gap-2 bg-terracotta hover:bg-terracotta-dark text-primary-foreground px-8 py-3 text-sm uppercase tracking-[0.15em] font-medium transition-colors"
+            >
+              View All
+              <span>→</span>
+            </a>
           </div>
         </div>
       </section>

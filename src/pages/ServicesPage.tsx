@@ -8,6 +8,7 @@ import heroImg from "@/assets/services-hero.jpg";
 import trainingImg from "@/assets/services-training.png";
 import trainingPhoto from "@/assets/services-training-photo.png";
 import modelSchoolImg from "@/assets/services-model-school.png";
+import modelSchoolPhoto from "@/assets/services-model-school-photo.png";
 import rtepImg from "@/assets/services-rtep.png";
 import puppetryImg from "@/assets/services-puppetry.png";
 import gallery1 from "@/assets/methodology-gallery-1.jpg";
@@ -90,27 +91,26 @@ const ServicesPage = () => {
 
         {/* Model Schools */}
         <section className="container-wide mb-16 md:mb-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-            <motion.img {...fadeUp} src={modelSchoolImg} alt="Model schools showcasing MGML methodology" className="w-full rounded-xl" />
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}>
-              <p className="text-muted-foreground text-sm italic mb-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <motion.div {...fadeUp}>
+              <img src={modelSchoolPhoto} alt="Model school MGML classroom" className="w-full rounded-xl" />
+              <p className="text-muted-foreground text-sm italic mt-4">
                 Inspiring success: Model schools showcasing the power of MGML methodology.
               </p>
             </motion.div>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            <motion.div {...fadeUp} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Setting up 'Model Schools' for immediate demonstration:</strong> We provide living illustrations of a successful MGML classroom to serve as a learning model for teachers not exposed to the methodology. Our focus is on communicating to project administrators that the physical design of MGML classrooms is child-friendly and promotes a non-authoritarian pedagogy and a democratic spirit in schools.
-              </p>
-            </motion.div>
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.05 }} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Follow-up support:</strong> We develop mechanisms of transparent evaluation and supportive monitoring, designing a monitoring and support supervision framework to monitor RIVER model classroom process. We also create tools for periodic classroom monitoring and support supervision to implement the RIVER model.
-              </p>
+            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="space-y-6">
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Setting up 'Model Schools' for immediate demonstration:</strong> We provide living illustrations of a successful MGML classroom to serve as a learning model for teachers not exposed to the methodology. Our focus is on communicating to project administrators that the physical design of MGML classrooms is child-friendly and promotes a non-authoritarian pedagogy and a democratic spirit in schools.
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Follow-up support:</strong> We develop mechanisms of transparent evaluation and supportive monitoring, designing a monitoring and support supervision framework to monitor RIVER model classroom process. We also create tools for periodic classroom monitoring and support supervision to implement the RIVER model.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>

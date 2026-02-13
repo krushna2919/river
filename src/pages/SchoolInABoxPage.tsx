@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -132,6 +133,12 @@ const SchoolInABoxPage = () => {
                 <p className="text-muted-foreground text-sm leading-relaxed">{item.caption}</p>
               </motion.div>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link to="/gallery" onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-terracotta font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all">
+              View All
+              <span>→</span>
+            </Link>
           </div>
         </section>
 

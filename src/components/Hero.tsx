@@ -28,10 +28,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="heading-hero text-white mb-8 max-w-5xl mx-auto leading-[1.1]"
+          className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-wide text-white mb-8 max-w-4xl mx-auto leading-[1.1]"
+          style={{ fontFamily: 'var(--font-heading)' }}
         >
-          Empowering Rural Communities<br />
-          Through Quality Education
+          Empowering Rural Communities Through Quality Education
         </motion.h1>
 
         <motion.div

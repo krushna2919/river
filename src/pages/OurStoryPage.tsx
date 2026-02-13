@@ -64,57 +64,37 @@ const ChronologySection = ({
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const autoScrollRef = useRef<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const cardWidth = 288 + 24; // w-72 (288px) + gap-6 (24px)
 
-  const updateScrollButtons = useCallback(() => {
+  const scrollToIndex = useCallback((index: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+    el.scrollTo({ left: index * cardWidth, behavior: "smooth" });
   }, []);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", updateScrollButtons);
-    updateScrollButtons();
-    return () => el.removeEventListener("scroll", updateScrollButtons);
-  }, [updateScrollButtons]);
-
-  // Auto-scroll effect
+  // Auto-advance one card at a time
   useEffect(() => {
     if (!isAutoScrolling) return;
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const scroll = () => {
-      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
-        el.scrollLeft = 0;
-      } else {
-        el.scrollLeft += 1;
-      }
-      autoScrollRef.current = requestAnimationFrame(scroll);
-    };
-
-    // Slow auto-scroll using setTimeout to control speed
     const interval = setInterval(() => {
-      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
-        el.scrollLeft = 0;
-      } else {
-        el.scrollLeft += 1;
-      }
-    }, 30);
-
+      setActiveIndex(prev => {
+        const next = prev + 1 >= chronologyData.length ? 0 : prev + 1;
+        scrollToIndex(next);
+        return next;
+      });
+    }, 3000);
     return () => clearInterval(interval);
-  }, [isAutoScrolling]);
+  }, [isAutoScrolling, chronologyData.length, scrollToIndex]);
 
-  const scrollBy = (direction: "left" | "right") => {
-    const el = scrollRef.current;
-    if (!el) return;
+  const scrollByCard = (direction: "left" | "right") => {
     setIsAutoScrolling(false);
-    el.scrollBy({ left: direction === "left" ? -320 : 320, behavior: "smooth" });
+    setActiveIndex(prev => {
+      const next = direction === "left"
+        ? Math.max(0, prev - 1)
+        : Math.min(chronologyData.length - 1, prev + 1);
+      scrollToIndex(next);
+      return next;
+    });
   };
 
   return (
@@ -128,16 +108,16 @@ const ChronologySection = ({
         <div className="relative">
           {/* Navigation buttons */}
           <button
-            onClick={() => scrollBy("left")}
-            disabled={!canScrollLeft}
+            onClick={() => scrollByCard("left")}
+            disabled={activeIndex === 0}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
             aria-label="Scroll left"
           >
             <ChevronLeft size={20} className="text-foreground" />
           </button>
           <button
-            onClick={() => scrollBy("right")}
-            disabled={!canScrollRight && !isAutoScrolling}
+            onClick={() => scrollByCard("right")}
+            disabled={activeIndex >= chronologyData.length - 1}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
             aria-label="Scroll right"
           >
@@ -147,7 +127,7 @@ const ChronologySection = ({
           {/* Horizontal scrolling container */}
           <div
             ref={scrollRef}
-            className="overflow-x-auto scrollbar-hide px-10"
+            className="overflow-x-auto scrollbar-hide px-10 snap-x snap-mandatory"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             onMouseEnter={() => setIsAutoScrolling(false)}
             onMouseLeave={() => setIsAutoScrolling(true)}
@@ -156,7 +136,7 @@ const ChronologySection = ({
               {chronologyData.map((milestone, index) => (
                 <div
                   key={index}
-                  className="w-72 flex-shrink-0 bg-background rounded-lg p-6 shadow-sm border border-border hover:shadow-md transition-shadow"
+                  className="w-72 flex-shrink-0 snap-start bg-background rounded-lg p-6 shadow-sm border border-border hover:shadow-md transition-shadow"
                 >
                   {/* Timeline dot and line */}
                   <div className="flex items-center gap-3 mb-4">

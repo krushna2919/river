@@ -43,7 +43,7 @@ const OurStory = () => {
               teaching methods, fostering social justice and equal opportunities.
             </p>
             <a
-              href="#methodology"
+              href="/our-story"
               className="inline-flex items-center gap-2 text-primary font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all"
             >
               View more

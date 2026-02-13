@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 import heroImg from "@/assets/services-hero.jpg";
 import trainingImg from "@/assets/services-training.png";
+import trainingPhoto from "@/assets/services-training-photo.png";
 import modelSchoolImg from "@/assets/services-model-school.png";
 import rtepImg from "@/assets/services-rtep.png";
 import puppetryImg from "@/assets/services-puppetry.png";
@@ -63,27 +64,26 @@ const ServicesPage = () => {
 
         {/* Training Programmes */}
         <section className="container-wide mb-16 md:mb-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-            <motion.img {...fadeUp} src={trainingImg} alt="Building capacity through workshops" className="w-full rounded-xl" />
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}>
-              <p className="text-muted-foreground text-sm italic mb-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-12">
+            <motion.div {...fadeUp}>
+              <img src={trainingPhoto} alt="Training workshop in session" className="w-full rounded-xl" />
+              <p className="text-muted-foreground text-sm italic mt-4">
                 Building capacity through workshops for innovative teaching approaches.
               </p>
             </motion.div>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            <motion.div {...fadeUp} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Capacity building through hands-on, activity-based training programmes:</strong> We provide comprehensive training to resource teachers in classroom transactions suited to the new methodology. Our three to five-day exposure visits acquaint teachers with an overall sense of the program, which they can then disseminate on their home ground.
-              </p>
-            </motion.div>
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.05 }} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Creative forums for transcreation of learning material:</strong> We offer fifteen-day workshops for trained teachers to provide hands-on training in the multi-grade, multi-level methodology, and orient them in classroom management. We also provide long-term Designers' Workshops for creating multi-grade, multi-level learning materials in languages other than Telugu.
-              </p>
+            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="space-y-6">
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Capacity building through hands-on, activity-based training programmes:</strong> We provide comprehensive training to resource teachers in classroom transactions suited to the new methodology. Our three to five-day exposure visits acquaint teachers with an overall sense of the program, which they can then disseminate on their home ground.
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Creative forums for transcreation of learning material:</strong> We offer fifteen-day workshops for trained teachers to provide hands-on training in the multi-grade, multi-level methodology, and orient them in classroom management. We also provide long-term Designers' Workshops for creating multi-grade, multi-level learning materials in languages other than Telugu.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>

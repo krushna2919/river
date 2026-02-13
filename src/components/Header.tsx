@@ -42,10 +42,10 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
   ];
 
   const ourImpactLinks = [
-    { label: "Impact Overview", href: "#impact" },
-    { label: "Case Studies", href: "#case-studies" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Reports", href: "#reports" },
+    { label: "Achievements", href: "/achievements" },
+    { label: "Awards & Recognitions", href: "/awards-recognitions" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Testimonials", href: "/testimonials" },
   ];
 
   // Reusable dropdown component (matches original: first item highlighted, others dark)

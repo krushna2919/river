@@ -14,6 +14,10 @@ import ContactUsPage from "./pages/ContactUsPage";
 import RiverPage from "./pages/RiverPage";
 import SchoolInABoxPage from "./pages/SchoolInABoxPage";
 import ServicesPage from "./pages/ServicesPage";
+import AchievementsPage from "./pages/AchievementsPage";
+import AwardsPage from "./pages/AwardsPage";
+import CaseStudiesPage from "./pages/CaseStudiesPage";
+import TestimonialsPage from "./pages/TestimonialsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +40,10 @@ const App = () => (
           <Route path="/river" element={<RiverPage />} />
           <Route path="/school-in-a-box" element={<SchoolInABoxPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
+          <Route path="/awards-recognitions" element={<AwardsPage />} />
+          <Route path="/case-studies" element={<CaseStudiesPage />} />
+          <Route path="/testimonials" element={<TestimonialsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

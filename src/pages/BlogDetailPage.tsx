@@ -11,7 +11,7 @@ const BlogDetailPage = () => {
   if (!post) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        <Header isInnerPage />
         <div className="pt-32 pb-20 text-center container-wide">
           <h1 className="heading-section text-foreground mb-4">Post Not Found</h1>
           <Link to="/blog" className="text-primary font-semibold hover:underline">
@@ -28,7 +28,7 @@ const BlogDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header isInnerPage />
 
       <article className="pt-32 pb-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">

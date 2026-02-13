@@ -7,7 +7,7 @@ import { blogPosts } from "@/data/blogPosts";
 const BlogPage = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header isInnerPage />
 
       {/* Title */}
       <section className="pt-32 pb-12 border-b border-border">

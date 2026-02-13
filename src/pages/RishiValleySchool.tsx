@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Maximize2, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -226,6 +227,14 @@ const RishiValleySchool = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+
+          {/* View All Gallery Link */}
+          <div className="mt-8 text-center">
+            <Link to="/gallery" onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-terracotta font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all">
+              View All
+              <span>→</span>
+            </Link>
           </div>
 
           {/* Back Link */}

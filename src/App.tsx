@@ -17,6 +17,7 @@ import ServicesPage from "./pages/ServicesPage";
 import AchievementsPage from "./pages/AchievementsPage";
 import AwardsPage from "./pages/AwardsPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
+import CaseStudyDetailPage from "./pages/CaseStudyDetailPage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import NotFound from "./pages/NotFound";
 
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/awards-recognitions" element={<AwardsPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
+          <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
           <Route path="/testimonials" element={<TestimonialsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

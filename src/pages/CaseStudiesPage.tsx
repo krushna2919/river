@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -14,16 +15,19 @@ const fadeUp = {
 
 const caseStudies = [
   {
+    slug: "mgml-learning-jharkhand",
     image: jharkhandImg,
     title: "Multi-Grade, Multi-Level (MGML) Learning in Jharkhand: A Case Study",
     date: "September 2, 2022",
   },
   {
+    slug: "vertical-competency-learning-bihar",
     image: biharImg,
     title: "Implementing Vertical Competency Based Learning in Bihar: A Case Study",
     date: "September 2, 2022",
   },
   {
+    slug: "snehabala-slim-cards-andhra-pradesh",
     image: andhraImg,
     title: "Snehabala and SLIM Cards for Competency-Based Learning in combined Andhra Pradesh: A Case Study",
     date: "September 2, 2022",
@@ -50,22 +54,23 @@ const CaseStudiesPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study, i) => (
               <motion.div
-                key={study.title}
+                key={study.slug}
                 {...fadeUp}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group cursor-pointer"
               >
-                <div className="overflow-hidden rounded-xl mb-4">
-                  <img
-                    src={study.image}
-                    alt={study.title}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
-                  {study.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">{study.date}</p>
+                <Link to={`/case-studies/${study.slug}`} className="group block">
+                  <div className="overflow-hidden rounded-xl mb-4">
+                    <img
+                      src={study.image}
+                      alt={study.title}
+                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+                    {study.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">{study.date}</p>
+                </Link>
               </motion.div>
             ))}
           </div>

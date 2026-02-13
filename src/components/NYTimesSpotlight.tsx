@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import NYTArticleModal from "@/components/NYTArticleModal";
 
 const NYTimesSpotlight = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [articleOpen, setArticleOpen] = useState(false);
 
   return (
     <section className="py-20 md:py-28 section-dark" ref={ref}>
@@ -44,13 +46,13 @@ const NYTimesSpotlight = () => {
               </p>
             </div>
 
-            <motion.a
-              href="#"
+            <button
+              onClick={() => setArticleOpen(true)}
               className="inline-flex items-center gap-2 text-primary font-semibold uppercase text-sm tracking-wider mt-8 hover:gap-3 transition-all"
             >
               Read article
               <span>→</span>
-            </motion.a>
+            </button>
           </motion.div>
 
           {/* Image */}
@@ -73,6 +75,8 @@ const NYTimesSpotlight = () => {
           </motion.div>
         </div>
       </div>
+
+      <NYTArticleModal open={articleOpen} onOpenChange={setArticleOpen} />
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import CircularLogo from "./CircularLogo";
@@ -180,12 +181,13 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
           {!showCompactHeader && (
             <nav className="hidden lg:flex items-center gap-8">
               <NavDropdown label="Our Impact" links={ourImpactLinks} isWhiteText />
-              <a
-                href="#donate"
+              <Link
+                to="/donate"
+                onClick={() => window.scrollTo(0, 0)}
                 className="text-hero-text/90 hover:text-hero-text text-sm uppercase tracking-[0.15em] font-medium transition-colors"
               >
                 Donate
-              </a>
+              </Link>
             </nav>
           )}
 
@@ -195,12 +197,13 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
               <NavDropdown label="About Us" links={aboutLinks} isWhiteText={false} />
               <NavDropdown label="What We Do" links={whatWeDoLinks} isWhiteText={false} />
               <NavDropdown label="Our Impact" links={ourImpactLinks} isWhiteText={false} />
-              <a
-                href="#donate"
+              <Link
+                to="/donate"
+                onClick={() => window.scrollTo(0, 0)}
                 className="bg-terracotta hover:bg-terracotta-dark text-primary-foreground px-6 py-2.5 text-sm uppercase tracking-[0.15em] font-medium transition-colors"
               >
                 Donate
-              </a>
+              </Link>
             </nav>
           )}
 
@@ -249,9 +252,9 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
                 isScrolled={showCompactHeader}
                 setIsOpen={setIsOpen}
               />
-              <a
-                href="#donate"
-                onClick={() => setIsOpen(false)}
+              <Link
+                to="/donate"
+                onClick={() => { setIsOpen(false); window.scrollTo(0, 0); }}
                 className={`px-4 py-3 text-sm uppercase tracking-[0.15em] font-medium transition-colors ${
                   showCompactHeader
                     ? "text-foreground hover:bg-muted"
@@ -259,7 +262,7 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
                 }`}
               >
                 Donate
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}

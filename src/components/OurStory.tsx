@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import storyImage from "@/assets/story-image.jpg";
+import storyImage from "@/assets/our-story-home.png";
 
 const OurStory = () => {
   const ref = useRef(null);

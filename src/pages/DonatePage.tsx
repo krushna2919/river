@@ -50,7 +50,7 @@ const DonatePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header isInnerPage />
       <main className="pt-24 pb-20">
         <div className="container-narrow">
           <motion.div

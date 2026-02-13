@@ -30,7 +30,7 @@ const Header = ({ isInnerPage = false }: HeaderProps) => {
   const aboutLinks = [
     { label: "Our Story", href: "/our-story" },
     { label: "Rishi Valley School", href: "/rishi-valley-school" },
-    { label: "Our Team", href: "#team" },
+    { label: "Our Team", href: "/our-team" },
     { label: "Contact Us", href: "#contact" },
   ];
 

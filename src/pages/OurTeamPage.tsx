@@ -39,11 +39,7 @@ Life at School: An Ethnographic Study (Oxford University Press, 1991, second edi
     image: teamKumaraswamy,
     name: "Dr A Kumaraswamy",
     role: "Secretary",
-    bio: `Dr A Kumaraswamy is the Secretary of Rishi Valley Education Centre (RVEC), and was previously the Principal of the Rishi Valley School. He holds a Ph.D. in Physics from the Indian Institute of Technology, Madras, and has published numerous research papers in the experimental and computational domains.
-
-He began teaching at the Rishi Valley School in 1982 after becoming interested in the domain of education and wanting to reside in a rural setting. Dr Kumaraswamy has been actively involved with all of RVEC's rural development initiatives since their inception.
-
-Dr Kumaraswamy has been instrumental in implementing alternative technologies at RVEC, such as biogas, solar water heating systems, and solar power generators. He has led the campus's water conservation and harvesting efforts.`,
+    bio: `Dr A Kumaraswamy is the Secretary of Rishi Valley Education Centre (RVEC), and was previously the Principal of the Rishi Valley School. He holds a Ph.D. in Physics from the Indian Institute of Technology, Madras, and has published numerous research papers in the experimental and computational domains. He worked as a post-doctoral fellow at IIT Madras for a few years before taking up a research position at the Cement Research Institute in Delhi. He began teaching at the Rishi Valley School in 1982 after becoming interested in the domain of education and wanting to reside in a rural setting. Dr Kumaraswamy has been actively involved with all of RVEC's rural development initiatives since their inception, and has been teaching at the RVEC when necessary. His responsibilities include conceptualising, planning, fundraising, mentoring staff, and overseeing the operation of the RVEC's various community-related initiatives. Dr Kumaraswamy has been instrumental in implementing alternative technologies at RVEC, such as biogas, solar water heating systems, and solar power generators. He has led the campus's water conservation and harvesting efforts and is adept with computer-based technologies, software development, and educational software tools.`,
   },
   {
     image: teamSailendran,

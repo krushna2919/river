@@ -310,21 +310,39 @@ const AwardsPage = () => {
         </div>
       </section>
 
-      {/* Read Article Dialog for 2018/19 Reimagine Education */}
+      {/* Read Article Dialog for 2018 NYT Citation */}
       <Dialog open={articleOpen} onOpenChange={setArticleOpen}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogTitle className="font-cormorant text-2xl md:text-3xl font-bold text-foreground">
-            Silver Award Winner - Hybrid Learning Category by Reimagine Education (2018/19)
+            Teaching Children Regardless of Grade
           </DialogTitle>
-          <div className="space-y-6 mt-4">
+          <p className="text-sm text-muted-foreground italic">By Alia Dharssi — The New York Times, 2018</p>
+          <div className="space-y-4 mt-4">
             <p className="text-muted-foreground leading-relaxed">
-              RIVER's innovative pedagogies were recognised with the Silver Award in the Hybrid Learning Category at the Reimagine Education Conference & Awards. The Reimagine Education Awards, often referred to as the "Oscars of Education," celebrate the most innovative approaches to education worldwide.
+              One day at the beginning of the 2017-2018 school year in the rural Rishi Valley region of Andhra Pradesh, India, two dozen children in Grades 1 through 5 gathered in a single classroom. Their teacher did not line them up by grade. Instead, the children worked at their own pace through a series of learning activities — climbing what their school calls a "learning ladder."
             </p>
-            <img src={awardREArticle1} alt="Reimagine Education Award Ceremony" className="w-full rounded-xl" />
             <p className="text-muted-foreground leading-relaxed">
-              The MGML methodology developed by RIVER combines self-paced learning materials with facilitated group activities, enabling children of different ages and ability levels to learn together effectively. This hybrid approach has been recognised for its scalability and impact across diverse educational contexts.
+              This is the essence of the Multi-Grade Multi-Level (MGML) methodology developed by the Rishi Valley Institute for Educational Resources (RIVER). In many rural Indian schools, a single teacher is responsible for children across multiple grade levels. Rather than viewing this as a limitation, RIVER turned it into an opportunity by creating a system where children advance based on competency rather than age or grade.
             </p>
-            <img src={awardREArticle2} alt="Reimagine Education Award" className="w-full rounded-xl" />
+            <img src={awardREArticle1} alt="RIVER classroom" className="w-full rounded-xl" />
+            <p className="text-muted-foreground leading-relaxed">
+              Children use self-learning materials — colourful cards and activities organised into "milestones" — that allow them to progress independently. Older or more advanced students often help younger ones, creating a peer-learning dynamic. The teacher serves as a facilitator, guiding children who need extra support and tracking progress on classroom charts.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              The approach has been adopted in over 900,000 schools across India, impacting more than 20 million children. It has also drawn international attention and has been adapted in countries including Ethiopia, Zambia, and Indonesia. The methodology has earned recognition from UNICEF, the World Economic Forum, and the Schwab Foundation.
+            </p>
+            <img src={awardREArticle2} alt="MGML learning materials" className="w-full rounded-xl" />
+            <p className="text-muted-foreground leading-relaxed">
+              "The beauty of the system is its simplicity," says Padmanabha Rao, one of RIVER's founders. "Any teacher, with minimal training, can use these materials to ensure every child learns at their own pace."
+            </p>
+            <a
+              href="https://www.nytimes.com/2018/11/09/opinion/teaching-children-regardless-of-grade.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 text-primary font-semibold underline underline-offset-4 hover:text-primary/80 transition-colors"
+            >
+              Read full article on The New York Times →
+            </a>
           </div>
         </DialogContent>
       </Dialog>

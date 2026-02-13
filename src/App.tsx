@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import RishiValleySchool from "./pages/RishiValleySchool";
 import AboutUs from "./pages/AboutUs";
 import WhatWeDo from "./pages/WhatWeDo";
+import OurStoryPage from "./pages/OurStoryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/rishi-valley-school" element={<RishiValleySchool />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/what-we-do" element={<WhatWeDo />} />
+          <Route path="/our-story" element={<OurStoryPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

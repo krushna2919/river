@@ -56,11 +56,11 @@ const coreTeam = [
     image: teamRama,
     name: "Rama Anumula",
     role: "Director",
-    bio: `Director of the Krishnamurti Foundation India's Rishi Valley Institute for Educational Resources (RIVER), Rama Anumula has 35 years of service with the institution. She along with her husband, Padmanabha Rao, pioneered the RIVER Multi-Grade, Multi-Level (MGML) model.
+    bio: `Director of the Krishnamurti Foundation India's Rishi Valley Institute for Educational Resources (RIVER), Rama Anumula has 35 years of service with the institution. She along with her husband, Padmanabha Rao, pioneered the RIVER Multi-Grade, Multi-Level (MGML) model and is in charge of implementing the RIVER methodology in various parts of India, besides Ethiopia, Nepal, Bangladesh, Sri Lanka, and Germany. She conceptualised, designed, and coordinated the development of numerous primary school learning packages, including 'School in a Box,' the Panchatantra Craft Package, the MGML Trainer Resource Pack, and the Pre-Primary Learning Package.
 
-She conceptualised, designed, and coordinated the development of numerous primary school learning packages, including 'School in a Box,' the Panchatantra Craft Package, the MGML Trainer Resource Pack, and the Pre-Primary Learning Package.
+She pioneered the concepts of 'Matric Mela,' a maths community festival; 'Mothers' Stories,' which adapts and uses rural women's oral traditions as reading programmes for first-generation learners; and 'Miniature Shadow Puppetry,' which adapts traditional puppetry as visual learning aids. Rama Anumula has led designer workshops for approximately 15 state-level resource groups to develop locally contextualised MGML teaching-learning packages. She has mentored students from universities in Germany, Switzerland, France, and the United States that have long-term collaborative projects with RIVER.
 
-Rama Anumula is an Ashoka International and Khemka Foundation Fellow, as well as the co-winner of the Schwab Foundation Social Entrepreneur of the Year Award for India at the India Economic Summit, 2009.`,
+Rama Anumula is an Ashoka International and Khemka Foundation Fellow, as well as the co-winner of the Schwab Foundation Social Entrepreneur of the Year Award for India at the India Economic Summit, 2009. She holds an MA in English and a postgraduate degree in English teaching from the Central Institute of English & Foreign Languages, Hyderabad.`,
   },
   {
     image: teamAnil,

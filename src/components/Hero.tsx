@@ -19,7 +19,7 @@ const Hero = () => {
           />
         </video>
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/35" />
       </div>
       
       {/* Content */}

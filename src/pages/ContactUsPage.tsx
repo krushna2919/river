@@ -32,8 +32,39 @@ const ContactUsPage = () => {
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
 
-      <main className="pt-28 md:pt-32 pb-20 md:pb-32">
-        <div className="container-wide">
+      <main className="pt-28 md:pt-32 pb-20 md:pb-32 relative overflow-hidden">
+        {/* Decorative dotted curved arrow */}
+        <svg
+          className="absolute top-0 right-0 w-[400px] h-[500px] pointer-events-none hidden md:block"
+          viewBox="0 0 400 500"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M380 20 C 350 80, 320 200, 280 280 C 240 360, 180 400, 120 420"
+            stroke="hsl(var(--muted-foreground) / 0.2)"
+            strokeWidth="2"
+            strokeDasharray="6 6"
+            fill="none"
+          />
+          {/* Arrowhead */}
+          <path
+            d="M125 410 L 118 422 L 130 420"
+            stroke="hsl(var(--muted-foreground) / 0.2)"
+            strokeWidth="2"
+            fill="none"
+          />
+          {/* Second decorative curve */}
+          <path
+            d="M350 60 C 330 120, 300 180, 260 230 C 220 280, 170 310, 130 330"
+            stroke="hsl(var(--muted-foreground) / 0.12)"
+            strokeWidth="1.5"
+            strokeDasharray="4 8"
+            fill="none"
+          />
+        </svg>
+
+        <div className="container-wide relative z-10">
           {/* Page Title */}
           <motion.h1
             {...fadeUp}

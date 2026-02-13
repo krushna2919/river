@@ -2,6 +2,18 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import awardsHero from "@/assets/awards-hero.jpg";
+import awardMA from "@/assets/award-ma.jpg";
+import awardReimagine from "@/assets/award-reimagine.png";
+import awardNITI from "@/assets/award-niti.jpg";
+import awardGJ from "@/assets/award-gj.jpg";
+import awardSJF from "@/assets/award-sjf.jpg";
+import awardWEF from "@/assets/award-wef.jpg";
+import awardSchwab from "@/assets/award-schwab.png";
+import awardGDN from "@/assets/award-gdn.png";
+import awardAshoka from "@/assets/award-ashoka.png";
+import awardUNICEF from "@/assets/award-unicef.png";
+import awardRockefeller from "@/assets/award-rockefeller.png";
+import awardHRD from "@/assets/award-hrd.png";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -11,19 +23,95 @@ const fadeUp = {
 };
 
 const awards = [
-  { year: "2021", title: "Millennium Alliance Innovation Challenge Award - Round 6 In Education Category", org: "Millennium Alliance", desc: "For scaling up the MGML methodology in government primary schools in North India under education category." },
-  { year: "2018/19", title: "Silver Award Winner - Hybrid Learning Category", org: "Reimagine Education", desc: "For RIVER's innovative pedagogies." },
-  { year: "2016", title: "Top 25 Social Innovations in India", org: "Ministry of External Affairs & NITI Aayog, Govt. of India", desc: "For offering commercially viable solutions to the socio-economic problems of India." },
-  { year: "2016", title: "Millennium Alliance Innovation Challenge Award - Round 3 In Education Category", org: "Millennium Alliance", desc: "For dissemination of the MGML methodology in government primary schools in the state of Andhra Pradesh." },
-  { year: "2012", title: "Ranked 74 — Top 100 Best NGOs in the World", org: "The Global Journal, Geneva", desc: 'As significant agents of social change and seeking to "move beyond outdated clichés and narrow conceptions about what an NGO is and does".' },
-  { year: "2011", title: "Jindal Prize", org: "Sitaram Jindal Foundation", desc: "For Education with emphasis on moral upliftment." },
-  { year: "2010/11", title: "Recognised by Multiple International Forums", org: "Visegrad, WEF Davos, Clinton Global Foundation & others", desc: "RIVER projects and its MGML Methodology recognised as an inspiring way of practice in global development." },
-  { year: "2009", title: "Social Entrepreneurs Of The Year", org: "Schwab Foundation for Social Entrepreneurship, World Economic Forum, Geneva", desc: "For pioneering solutions for social and environmental challenges to highlight and expand leading models of social innovation around the world." },
-  { year: "2004", title: "The Japanese Prize for the Most Innovative Development Project", org: "The Global Development Network", desc: "Research on development produced by researchers from developing and transition countries." },
-  { year: "2003", title: "Ashoka Fellowship", org: "Ashoka", desc: "Ashoka supports the world's leading social entrepreneurs, learns from the patterns in their innovations, and mobilises a global community that embraces these new frameworks." },
-  { year: "2003", title: "Recognition by UNICEF & Government of India", org: "UNICEF & Govt. of India", desc: "Recognition for adapting and expanding RIVER learning programmes in government primary schools in 7 Indian states." },
-  { year: "1997", title: "The Rockefeller Foundation Grant", org: "Rockefeller Foundation", desc: "Rockefeller Grant enriched collaborations across linguistic zones in India." },
-  { year: "1995", title: "Ministry of HRD, Government of India Grant", org: "Govt. of India", desc: "Grant for R&D and dissemination of the model." },
+  {
+    year: "2021",
+    image: awardMA,
+    title: "Millennium Alliance Innovation Challenge Award - Round 6 In Education Category By Millennium Alliance",
+    desc: "For scaling up the MGML methodology in government primary schools in North India under education category.",
+    link: "https://tinyurl.com/558Ue4e6",
+  },
+  {
+    year: "2018/19",
+    image: awardReimagine,
+    title: "Silver Award Winner - Hybrid Learning Category by Reimagine Education",
+    desc: "For RIVER's innovative pedagogies.",
+    link: "https://tinyurl.com/4epa772d",
+  },
+  {
+    year: "2016",
+    image: awardNITI,
+    title: "Top 25 Social Innovations in India by Ministry of External Affairs & NITI Aayog, Govt. of India",
+    desc: "For offering commercially viable solutions to the socio-economic problems of India.",
+    link: "https://tinyurl.com/Sk8runff",
+  },
+  {
+    year: "2016",
+    image: awardMA,
+    title: "Millennium Alliance Innovation Challenge Award - Round 3 In Education Category By Millennium Alliance",
+    desc: "For dissemination of the MGML methodology in government primary schools in the state of Andhra Pradesh.",
+    link: "https://tinyurl.com/2bc76sm6",
+  },
+  {
+    year: "2012",
+    image: awardGJ,
+    title: "Ranked 74 — Top 100 best NGOs in the world by The Global Journal, Geneva",
+    desc: 'As significant agents of social change and seeking to "move beyond outdated clichés and narrow conceptions about what an NGO is and does".',
+    link: "https://tinyurl.com/tfdhb53a",
+  },
+  {
+    year: "2011",
+    image: awardSJF,
+    title: "Jindal Prize By Sitaram Jindal Foundation",
+    desc: "For Education with emphasis on moral upliftment.",
+    link: "https://tinyurl.com/ywbf6tvz",
+  },
+  {
+    year: "2010/11",
+    image: awardWEF,
+    title: "Recognised by Visegrad Regional Seminar on Global Development Education, Prague, Czech Republic; World Economic Summit in Davos, Switzerland; Summer Davos Meeting of New Champions at Dalian, China; Clinton Global Foundation, New York",
+    desc: "RIVER projects and its MGML Methodology as an inspiring way of practice in global development.",
+    link: "https://tinyurl.com/2w5ztuec",
+  },
+  {
+    year: "2009",
+    image: awardSchwab,
+    title: "Social Entrepreneurs Of The Year By The Schwab Foundation For Social Entrepreneurship, World Economic Forum, Geneva",
+    desc: "For pioneering solutions for social and environmental challenges to highlight and expand leading models of social innovation around the world.",
+    link: "https://tinyurl.com/2e6f84ux",
+  },
+  {
+    year: "2004",
+    image: awardGDN,
+    title: "The Japanese Prize for the Most Innovative Development Project by The Global Development Network",
+    desc: "Research on development produced by researchers from developing and transition countries.",
+    link: "https://tinyurl.com/5n6d5r74",
+  },
+  {
+    year: "2003",
+    image: awardAshoka,
+    title: "The Japanese Prize for the Most Innovative Development Project by The Global Development Network",
+    desc: "Ashoka supports the world's leading social entrepreneurs, learns from the patterns in their innovations, and mobilises a global community that embraces these new frameworks.",
+    link: "https://tinyurl.com/2p8y6etc",
+  },
+  {
+    year: "2003",
+    image: awardUNICEF,
+    title: "UNICEF & Government of India",
+    desc: "Recognition for adapting and expanding RIVER learning programmes in government primary schools in 7 Indian states.",
+    link: "https://tinyurl.com/ward88e5",
+  },
+  {
+    year: "1997",
+    image: awardRockefeller,
+    title: "The Rockefeller Foundation Grant",
+    desc: "Rockefeller Grant enriched collaborations across linguistic zones in India.",
+  },
+  {
+    year: "1995",
+    image: awardHRD,
+    title: "Ministry of HRD, Government of India Grant",
+    desc: "Grant for R&D and dissemination of the model.",
+  },
 ];
 
 const citations = [
@@ -34,20 +122,26 @@ const citations = [
   { year: "2018", text: 'Article on RIVER Programmes in New York Times: "Teaching Children Regardless of Grade" by Alia Dharssi.' },
 ];
 
-const partnerships = [
+const partnershipsLeft = [
   "University of Regensburg, Germany",
   "University of St. Gallen, Switzerland",
   "University of Cambridge, UK",
-  "University of Lorraine, France",
+];
+
+const partnershipsRight = [
+  "University of Lorraine (formerly Paul Verlaine University, Metz, France)",
   "Teachers College, Columbia University",
   "Brookings Institution, Washington DC",
 ];
 
-const academicAcclaim = [
+const academicLeft = [
   "Harvard Kennedy School",
   "University of Oxford, UK",
   "India School Fund of Harvard Business School",
   "Kent State University, Ohio",
+];
+
+const academicRight = [
   "City University of New York",
   "University of New England, Australia",
   "The Chulalongkorn University, Bangkok",
@@ -67,85 +161,127 @@ const AwardsPage = () => {
             Awards & Recognitions
           </motion.h1>
           <motion.p {...fadeUp} transition={{ duration: 0.6, delay: 0.2 }} className="text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-12">
-            The Rishi Valley Institute for Educational Resources has been a pioneer in the field of elementary education for several decades, setting new benchmarks and establishing innovative approaches to learning. Our MGML methodology has been successful in promoting social and gender equity in education and has impacted over 20 million children across more than 900,000 schools.
+            The Rishi Valley Institute for Educational Resources has been a pioneer in the field of elementary education for several decades, setting new benchmarks and establishing innovative approaches to learning. Our MGML (Multi-Grade Multi-Level) methodology has been successful in promoting social and gender equity in education and has impacted over 20 million children across more than 900,000 schools.
           </motion.p>
           <motion.img {...fadeUp} transition={{ duration: 0.6, delay: 0.3 }} src={awardsHero} alt="Awards & Recognitions" className="w-full rounded-xl" />
           <motion.p {...fadeUp} transition={{ duration: 0.6, delay: 0.4 }} className="text-muted-foreground max-w-3xl mx-auto leading-relaxed mt-8">
-            With an impressive outreach, RIVER has been able to positively impact education in many rural areas, providing children with access to quality education. The MGML pedagogy has received widespread recognition and appreciation from education experts and institutions globally for its innovative approach.
+            With an impressive outreach, RIVER has been able to positively impact education in many rural areas, providing children with access to quality education that would otherwise be unavailable to them. The MGML pedagogy has received widespread recognition and appreciation from education experts and institutions globally for its innovative approach. The institute has been recognised by the Indian government and various international press and organisations for its remarkable contributions to the field of education.
           </motion.p>
         </div>
       </section>
 
       {/* Awards Timeline */}
       <section className="py-16 md:py-24">
-        <div className="container-wide max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-[60px] md:left-[80px] top-0 bottom-0 w-px bg-border" />
+        <div className="container-wide max-w-5xl mx-auto">
+          <div className="space-y-16">
+            {awards.map((award, i) => (
+              <motion.div
+                key={i}
+                {...fadeUp}
+                transition={{ duration: 0.6, delay: i * 0.05 }}
+                className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center"
+              >
+                {/* Image */}
+                <div className={`${i % 2 !== 0 ? "lg:order-2" : ""}`}>
+                  <img
+                    src={award.image}
+                    alt={award.title}
+                    className="w-full rounded-xl max-h-[300px] object-cover"
+                  />
+                </div>
 
-            <div className="space-y-8">
-              {awards.map((award, i) => (
-                <motion.div key={i} {...fadeUp} transition={{ duration: 0.6, delay: i * 0.05 }} className="flex gap-6 md:gap-8">
-                  <div className="shrink-0 w-[50px] md:w-[70px] text-right">
-                    <span className="font-cormorant text-lg md:text-xl font-bold text-primary">{award.year}</span>
-                  </div>
-                  <div className="relative pt-1">
-                    <div className="absolute -left-[13px] top-2 w-3 h-3 rounded-full bg-primary border-2 border-background" />
-                    <div className="pl-4">
-                      <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground mb-1">{award.title}</h3>
-                      <p className="text-primary text-sm font-semibold uppercase tracking-wider mb-2">{award.org}</p>
+                {/* Content */}
+                <div className={`${i % 2 !== 0 ? "lg:order-1" : ""}`}>
+                  {award.link ? (
+                    <a href={award.link} target="_blank" rel="noopener noreferrer" className="group block">
+                      <span className="font-cormorant text-2xl md:text-3xl font-bold text-primary block mb-2">{award.year}</span>
+                      <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-3">
+                        {award.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">{award.desc}</p>
+                    </a>
+                  ) : (
+                    <div>
+                      <span className="font-cormorant text-2xl md:text-3xl font-bold text-primary block mb-2">{award.year}</span>
+                      <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground mb-3">
+                        {award.title}
+                      </h3>
                       <p className="text-muted-foreground leading-relaxed">{award.desc}</p>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Important Citations */}
-      <section className="py-16 md:py-24 section-cream">
-        <div className="container-wide max-w-4xl mx-auto">
-          <motion.h2 {...fadeUp} className="heading-section text-foreground text-center mb-12">Important Citations</motion.h2>
-          <div className="space-y-6">
-            {citations.map((c, i) => (
-              <motion.div key={i} {...fadeUp} transition={{ duration: 0.6, delay: i * 0.05 }} className="flex gap-4 items-start">
-                <span className="font-cormorant text-lg font-bold text-primary shrink-0 w-12">{c.year}</span>
-                <p className="text-muted-foreground leading-relaxed">{c.text}</p>
+                  )}
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partnerships & Academic Acclaim */}
-      <section className="py-16 md:py-24">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+      {/* Important Citations */}
+      <section className="py-16 md:py-24 section-cream">
+        <div className="container-wide max-w-5xl mx-auto">
+          <motion.h2 {...fadeUp} className="heading-section text-foreground text-center mb-12">Important Citations</motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {citations.map((c, i) => (
+              <motion.div key={i} {...fadeUp} transition={{ duration: 0.6, delay: i * 0.05 }} className="bg-background rounded-xl p-6 shadow-sm">
+                <span className="font-cormorant text-2xl font-bold text-primary block mb-3">{c.year}</span>
+                <p className="text-muted-foreground leading-relaxed text-sm">{c.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* International Partnerships - Dark Section */}
+      <section className="py-16 md:py-24 bg-foreground text-background">
+        <div className="container-wide max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 mb-12">
             <motion.div {...fadeUp}>
-              <h2 className="font-cormorant text-2xl md:text-3xl font-bold text-foreground mb-6">International Partnerships & Collaborations</h2>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                We have initiated collaborative research projects with various universities to understand the implications of multi-grade education in diverse communities.
-              </p>
-              <ul className="space-y-3">
-                {partnerships.map((p, i) => (
-                  <li key={i} className="flex gap-3 text-muted-foreground">
-                    <span className="text-primary shrink-0">•</span>{p}
-                  </li>
-                ))}
-              </ul>
+              <h2 className="font-cormorant text-2xl md:text-3xl font-bold mb-6">International Partnerships & Collaborations</h2>
             </motion.div>
             <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}>
-              <h2 className="font-cormorant text-2xl md:text-3xl font-bold text-foreground mb-6">Academic Acclaim</h2>
-              <ul className="space-y-3">
-                {academicAcclaim.map((a, i) => (
-                  <li key={i} className="flex gap-3 text-muted-foreground">
-                    <span className="text-primary shrink-0">•</span>{a}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-background/80 leading-relaxed">
+                We have initiated collaborative research projects with various universities in order to understand the implications of multi-grade education in diverse communities and to benefit from contemporary pedagogical theories and practices.
+              </p>
             </motion.div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.ul {...fadeUp} className="space-y-4">
+              {partnershipsLeft.map((p, i) => (
+                <li key={i} className="flex gap-3 text-background/80">
+                  <span className="text-primary shrink-0">•</span>{p}
+                </li>
+              ))}
+            </motion.ul>
+            <motion.ul {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="space-y-4">
+              {partnershipsRight.map((p, i) => (
+                <li key={i} className="flex gap-3 text-background/80">
+                  <span className="text-primary shrink-0">•</span>{p}
+                </li>
+              ))}
+            </motion.ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Academic Acclaim */}
+      <section className="py-16 md:py-24">
+        <div className="container-wide max-w-5xl mx-auto">
+          <motion.h2 {...fadeUp} className="font-cormorant text-2xl md:text-3xl font-bold text-foreground mb-8">Academic Acclaim</motion.h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <motion.ul {...fadeUp} className="space-y-4">
+              {academicLeft.map((a, i) => (
+                <li key={i} className="flex gap-3 text-muted-foreground">
+                  <span className="text-primary shrink-0">•</span>{a}
+                </li>
+              ))}
+            </motion.ul>
+            <motion.ul {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="space-y-4">
+              {academicRight.map((a, i) => (
+                <li key={i} className="flex gap-3 text-muted-foreground">
+                  <span className="text-primary shrink-0">•</span>{a}
+                </li>
+              ))}
+            </motion.ul>
           </div>
         </div>
       </section>

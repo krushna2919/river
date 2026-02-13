@@ -125,7 +125,7 @@ const citations = [
   { year: "1997", text: "Bringing Within Reach: A Document on Universalization of Girls' Education (UNICEF, 1997)" },
   { year: "1999", text: "Article in a Spanish Magazine Human Planet: Ideas to Change the World August 1999 by Nuria Verde" },
   { year: "2000", text: "A Valley of Learning by Julia Ponsonby, Resurgence, Sep-Oct 2000." },
-  { year: "2018", text: 'Article on RIVER Programmes in New York Times: "Teaching Children Regardless of Grade" by Alia Dharssi.' },
+  { year: "2018", text: 'Article on RIVER Programmes in New York Times: "Teaching Children Regardless of Grade" by Alia Dharssi.', hasArticle: true },
 ];
 
 const partnershipsLeft = [
@@ -241,6 +241,14 @@ const AwardsPage = () => {
               <motion.div key={i} {...fadeUp} transition={{ duration: 0.6, delay: i * 0.05 }} className="bg-background rounded-xl p-6 shadow-sm">
                 <span className="font-cormorant text-2xl font-bold text-primary block mb-3">{c.year}</span>
                 <p className="text-muted-foreground leading-relaxed text-sm">{c.text}</p>
+                {c.hasArticle && (
+                  <button
+                    onClick={() => setArticleOpen(true)}
+                    className="mt-3 text-primary font-semibold underline underline-offset-4 hover:text-primary/80 transition-colors text-sm"
+                  >
+                    Read Article →
+                  </button>
+                )}
               </motion.div>
             ))}
           </div>

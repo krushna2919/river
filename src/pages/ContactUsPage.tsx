@@ -35,31 +35,32 @@ const ContactUsPage = () => {
       <main className="pt-28 md:pt-32 pb-20 md:pb-32 relative overflow-hidden">
         {/* Decorative dotted curved arrow */}
         <svg
-          className="absolute top-0 right-0 w-[400px] h-[500px] pointer-events-none hidden md:block"
-          viewBox="0 0 400 500"
+          className="absolute -top-10 -right-10 w-[700px] h-[800px] pointer-events-none hidden md:block"
+          viewBox="0 0 700 800"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          {/* Main sweeping curve from top-right down and left */}
           <path
-            d="M380 20 C 350 80, 320 200, 280 280 C 240 360, 180 400, 120 420"
-            stroke="hsl(var(--muted-foreground) / 0.2)"
+            d="M650 0 C 620 100, 580 220, 500 340 C 420 460, 300 540, 180 600"
+            stroke="hsl(var(--muted-foreground) / 0.15)"
             strokeWidth="2"
-            strokeDasharray="6 6"
+            strokeDasharray="8 8"
             fill="none"
           />
           {/* Arrowhead */}
           <path
-            d="M125 410 L 118 422 L 130 420"
-            stroke="hsl(var(--muted-foreground) / 0.2)"
+            d="M190 592 L 175 605 L 192 604"
+            stroke="hsl(var(--muted-foreground) / 0.15)"
             strokeWidth="2"
             fill="none"
           />
-          {/* Second decorative curve */}
+          {/* Second parallel curve (lighter) */}
           <path
-            d="M350 60 C 330 120, 300 180, 260 230 C 220 280, 170 310, 130 330"
-            stroke="hsl(var(--muted-foreground) / 0.12)"
+            d="M680 30 C 650 140, 600 260, 520 370 C 440 480, 330 550, 210 610"
+            stroke="hsl(var(--muted-foreground) / 0.08)"
             strokeWidth="1.5"
-            strokeDasharray="4 8"
+            strokeDasharray="5 10"
             fill="none"
           />
         </svg>

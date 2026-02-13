@@ -84,7 +84,7 @@ const OurImpact = () => {
           className="text-center mt-12"
         >
           <a
-            href="#"
+            href="/achievements"
             className="inline-flex items-center gap-2 text-primary font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all"
           >
             View all Achievement

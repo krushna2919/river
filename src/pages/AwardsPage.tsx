@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import awardsHero from "@/assets/awards-hero.jpg";
 import awardMA from "@/assets/award-ma.jpg";
 import awardReimagine from "@/assets/award-reimagine.png";
@@ -14,6 +16,8 @@ import awardAshoka from "@/assets/award-ashoka.png";
 import awardUNICEF from "@/assets/award-unicef.png";
 import awardRockefeller from "@/assets/award-rockefeller.png";
 import awardHRD from "@/assets/award-hrd.png";
+import awardREArticle1 from "@/assets/award-re-article-1.jpg";
+import awardREArticle2 from "@/assets/award-re-article-2.jpg";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -36,6 +40,7 @@ const awards = [
     title: "Silver Award Winner - Hybrid Learning Category by Reimagine Education",
     desc: "For RIVER's innovative pedagogies.",
     link: "https://tinyurl.com/4epa772d",
+    hasArticle: true,
   },
   {
     year: "2016",
@@ -149,6 +154,8 @@ const academicRight = [
 ];
 
 const AwardsPage = () => {
+  const [articleOpen, setArticleOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
@@ -208,6 +215,14 @@ const AwardsPage = () => {
                       </h3>
                       <p className="text-muted-foreground leading-relaxed">{award.desc}</p>
                     </div>
+                  )}
+                  {award.hasArticle && (
+                    <button
+                      onClick={() => setArticleOpen(true)}
+                      className="mt-4 text-primary font-semibold underline underline-offset-4 hover:text-primary/80 transition-colors"
+                    >
+                      Read Article →
+                    </button>
                   )}
                 </div>
               </motion.div>
@@ -285,6 +300,25 @@ const AwardsPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Read Article Dialog for 2018/19 Reimagine Education */}
+      <Dialog open={articleOpen} onOpenChange={setArticleOpen}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogTitle className="font-cormorant text-2xl md:text-3xl font-bold text-foreground">
+            Silver Award Winner - Hybrid Learning Category by Reimagine Education (2018/19)
+          </DialogTitle>
+          <div className="space-y-6 mt-4">
+            <p className="text-muted-foreground leading-relaxed">
+              RIVER's innovative pedagogies were recognised with the Silver Award in the Hybrid Learning Category at the Reimagine Education Conference & Awards. The Reimagine Education Awards, often referred to as the "Oscars of Education," celebrate the most innovative approaches to education worldwide.
+            </p>
+            <img src={awardREArticle1} alt="Reimagine Education Award Ceremony" className="w-full rounded-xl" />
+            <p className="text-muted-foreground leading-relaxed">
+              The MGML methodology developed by RIVER combines self-paced learning materials with facilitated group activities, enabling children of different ages and ability levels to learn together effectively. This hybrid approach has been recognised for its scalability and impact across diverse educational contexts.
+            </p>
+            <img src={awardREArticle2} alt="Reimagine Education Award" className="w-full rounded-xl" />
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>

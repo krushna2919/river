@@ -1,4 +1,5 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -229,7 +230,12 @@ const caseStudiesData: CaseStudy[] = [
 
 const CaseStudyDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const location = useLocation();
   const study = caseStudiesData.find((s) => s.slug === slug);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   if (!study) {
     return (

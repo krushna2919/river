@@ -143,11 +143,9 @@ const DonatePage = () => {
                       <SelectValue placeholder="--Select--" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="education">Education</SelectItem>
-                      <SelectItem value="river">RIVER Programme</SelectItem>
-                      <SelectItem value="school-in-a-box">School in a Box</SelectItem>
-                      <SelectItem value="teacher-training">Teacher Training</SelectItem>
-                      <SelectItem value="general">General Fund</SelectItem>
+                      <SelectItem value="corpus">Corpus</SelectItem>
+                      <SelectItem value="specific">Specific</SelectItem>
+                      <SelectItem value="general">General</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

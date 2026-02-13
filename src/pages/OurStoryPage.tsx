@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, X } from "lucide-react";
+import { Maximize2, X, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import heroImg from "@/assets/our-story-hero.jpg";
@@ -51,6 +51,164 @@ const galleryData = [
   { src: gallery7, caption: "In MGML learning, children embrace local culture and context through interactive classroom activities." },
   { src: gallery8, caption: "Nourishing young minds: Nutritious mid-day meals play a significant role in rural education scenarios." },
 ];
+
+/* Horizontal Auto-Scrolling Chronology */
+const ChronologySection = ({
+  chronologyData,
+  expandedItems,
+  toggleExpand,
+}: {
+  chronologyData: { year: string; event: string; expandedText?: string }[];
+  expandedItems: Set<number>;
+  toggleExpand: (index: number) => void;
+}) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const autoScrollRef = useRef<number | null>(null);
+
+  const updateScrollButtons = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 1);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", updateScrollButtons);
+    updateScrollButtons();
+    return () => el.removeEventListener("scroll", updateScrollButtons);
+  }, [updateScrollButtons]);
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (!isAutoScrolling) return;
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const scroll = () => {
+      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
+        el.scrollLeft = 0;
+      } else {
+        el.scrollLeft += 1;
+      }
+      autoScrollRef.current = requestAnimationFrame(scroll);
+    };
+
+    // Slow auto-scroll using setTimeout to control speed
+    const interval = setInterval(() => {
+      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
+        el.scrollLeft = 0;
+      } else {
+        el.scrollLeft += 1;
+      }
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [isAutoScrolling]);
+
+  const scrollBy = (direction: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setIsAutoScrolling(false);
+    el.scrollBy({ left: direction === "left" ? -320 : 320, behavior: "smooth" });
+  };
+
+  return (
+    <section className="py-16 md:py-24 section-cream">
+      <div className="container-wide">
+        <div className="text-center mb-12">
+          <span className="heading-subsection block mb-4">Chronology</span>
+          <h2 className="heading-section text-foreground">Timeline of Achievements</h2>
+        </div>
+
+        <div className="relative">
+          {/* Navigation buttons */}
+          <button
+            onClick={() => scrollBy("left")}
+            disabled={!canScrollLeft}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={20} className="text-foreground" />
+          </button>
+          <button
+            onClick={() => scrollBy("right")}
+            disabled={!canScrollRight && !isAutoScrolling}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-full p-2 shadow-md disabled:opacity-30 hover:bg-background transition-colors"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={20} className="text-foreground" />
+          </button>
+
+          {/* Horizontal scrolling container */}
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto scrollbar-hide px-10"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onMouseLeave={() => setIsAutoScrolling(true)}
+          >
+            <div className="flex gap-6 py-4" style={{ width: "max-content" }}>
+              {chronologyData.map((milestone, index) => (
+                <div
+                  key={index}
+                  className="w-72 flex-shrink-0 bg-background rounded-lg p-6 shadow-sm border border-border hover:shadow-md transition-shadow"
+                >
+                  {/* Timeline dot and line */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-3 h-3 rounded-full bg-primary flex-shrink-0" />
+                    <div className="h-px flex-1 bg-border" />
+                  </div>
+                  <span className="text-primary font-serif font-bold text-xl block mb-2">
+                    {milestone.year}
+                  </span>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{milestone.event}</p>
+                  {milestone.expandedText && (
+                    <>
+                      <button
+                        onClick={() => toggleExpand(index)}
+                        className="text-primary text-sm font-semibold mt-2 hover:underline"
+                      >
+                        {expandedItems.has(index) ? "Show less" : "Read more"}
+                      </button>
+                      <AnimatePresence>
+                        {expandedItems.has(index) && (
+                          <motion.p
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="text-muted-foreground mt-2 text-xs"
+                          >
+                            {milestone.expandedText}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Play/Pause control */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setIsAutoScrolling(!isAutoScrolling)}
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {isAutoScrolling ? <Pause size={14} /> : <Play size={14} />}
+            {isAutoScrolling ? "Pause" : "Play"} auto-scroll
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const OurStoryPage = () => {
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
@@ -260,68 +418,12 @@ const OurStoryPage = () => {
         </div>
       </section>
 
-      {/* Chronology Section */}
-      <section className="py-16 md:py-24 section-cream">
-        <div className="container-wide max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="heading-subsection block mb-4">Chronology</span>
-            <h2 className="heading-section text-foreground">Timeline of Achievements</h2>
-          </div>
-
-          <div className="relative">
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-px" />
-
-            <div className="space-y-8">
-              {chronologyData.map((milestone, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.5) }}
-                  className={`relative flex items-start gap-6 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full bg-primary -translate-x-1/2 ring-4 ring-background mt-1" />
-                  <div
-                    className={`ml-12 md:ml-0 md:w-1/2 ${
-                      index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
-                    }`}
-                  >
-                    <span className="text-primary font-serif font-bold text-xl">
-                      {milestone.year}
-                    </span>
-                    <p className="text-muted-foreground mt-1">{milestone.event}</p>
-                    {milestone.expandedText && (
-                      <>
-                        <button
-                          onClick={() => toggleExpand(index)}
-                          className="text-terracotta text-sm font-semibold mt-2 hover:underline"
-                        >
-                          {expandedItems.has(index) ? "Show less" : "Read more"}
-                        </button>
-                        <AnimatePresence>
-                          {expandedItems.has(index) && (
-                            <motion.p
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              className="text-muted-foreground mt-2 text-sm"
-                            >
-                              {milestone.expandedText}
-                            </motion.p>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Chronology Section - Horizontal Auto-Scroll */}
+      <ChronologySection
+        chronologyData={chronologyData}
+        expandedItems={expandedItems}
+        toggleExpand={toggleExpand}
+      />
 
       {/* Founder Section */}
       <section className="py-16 md:py-24 bg-background">

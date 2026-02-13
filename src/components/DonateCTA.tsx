@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const DonateCTA = () => {
   const ref = useRef(null);
@@ -31,9 +32,9 @@ const DonateCTA = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <a href="#" className="btn-terracotta inline-block">
+          <Link to="/donate" onClick={() => window.scrollTo(0, 0)} className="btn-terracotta inline-block">
             Donate Now
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

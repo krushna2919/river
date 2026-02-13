@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -39,12 +40,13 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <a
-            href="#donate"
+          <Link
+            to="/donate"
+            onClick={() => window.scrollTo(0, 0)}
             className="btn-terracotta inline-block"
           >
             Donate Now
-          </a>
+          </Link>
         </motion.div>
       </div>
 

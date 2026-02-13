@@ -12,6 +12,7 @@ import modelSchoolPhoto from "@/assets/services-model-school-photo.png";
 import rtepImg from "@/assets/services-rtep.png";
 import rtepPhoto from "@/assets/services-rtep-photo.png";
 import puppetryImg from "@/assets/services-puppetry.png";
+import puppetryPhoto from "@/assets/services-puppetry-photo.png";
 import gallery1 from "@/assets/methodology-gallery-1.jpg";
 import gallery2 from "@/assets/methodology-gallery-2.jpg";
 import gallery3 from "@/assets/methodology-gallery-3.jpg";
@@ -138,27 +139,26 @@ const ServicesPage = () => {
 
         {/* Arts & Crafts */}
         <section className="container-wide mb-16 md:mb-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
-            <motion.img {...fadeUp} src={puppetryImg} alt="Learning through puppetry" className="w-full rounded-xl" />
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }}>
-              <p className="text-muted-foreground text-sm italic">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <motion.div {...fadeUp}>
+              <img src={puppetryPhoto} alt="Children with puppetry crafts" className="w-full rounded-xl" />
+              <p className="text-muted-foreground text-sm italic mt-4">
                 Learning through puppetry: Reviving tradition and inspiring participation.
               </p>
             </motion.div>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            <motion.div {...fadeUp} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Arts & Crafts programme:</strong> Offers a Panchatantra Puppetry and Crafts kit to introduce shadow puppetry, Andhra folk music, Indian classical music and language to first-generation children, while also reinforcing values in human behaviour through workbook exercises. Puppetry has become an integral part of the learning methodology in the Telugu-medium schools, motivating students to actively participate, reviving the dying art form of storytelling in rural areas, and creating opportunities for didactic theatre.
-              </p>
-            </motion.div>
-            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.05 }} className="flex gap-4">
-              <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
-              <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">Building a critical mass of people to sustain the spirit and vision of the project:</strong> Our three-day workshops for administrators provide insights into the organisational structure and working of the program.
-              </p>
+            <motion.div {...fadeUp} transition={{ duration: 0.6, delay: 0.1 }} className="space-y-6">
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Arts & Crafts programme:</strong> Offers a Panchatantra Puppetry and Crafts kit to introduce shadow puppetry, Andhra folk music, Indian classical music and language to first-generation children, while also reinforcing values in human behaviour through workbook exercises. Puppetry has become an integral part of the learning methodology in the Telugu-medium schools, motivating students to actively participate, reviving the dying art form of storytelling in rural areas, and creating opportunities for didactic theatre.
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <span className="text-primary font-bold text-lg mt-0.5 shrink-0">•</span>
+                <p className="text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground">Building a critical mass of people to sustain the spirit and vision of the project:</strong> Our three-day workshops for administrators provide insights into the organisational structure and working of the program.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>

@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import jharkhandImg from "@/assets/case-study-jharkhand.jpg";
-import biharImg from "@/assets/case-study-bihar.jpg";
-import andhraImg from "@/assets/case-study-andhra.jpg";
+import { sanityClient, urlFor } from "@/lib/sanity";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -13,28 +12,28 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
-const caseStudies = [
-  {
-    slug: "mgml-learning-jharkhand",
-    image: jharkhandImg,
-    title: "Multi-Grade, Multi-Level (MGML) Learning in Jharkhand: A Case Study",
-    date: "September 2, 2022",
-  },
-  {
-    slug: "vertical-competency-learning-bihar",
-    image: biharImg,
-    title: "Implementing Vertical Competency Based Learning in Bihar: A Case Study",
-    date: "September 2, 2022",
-  },
-  {
-    slug: "snehabala-slim-cards-andhra-pradesh",
-    image: andhraImg,
-    title: "Snehabala and SLIM Cards for Competency-Based Learning in combined Andhra Pradesh: A Case Study",
-    date: "September 2, 2022",
-  },
-];
+type CaseStudyListItem = {
+  _id: string;
+  slug: { current: string };
+  title: string;
+  image: unknown;
+  // No date field in schema — use updatedAt or fixed date from summary
+  _updatedAt: string;
+};
+
+const QUERY = `*[_type == "caseStudy"] | order(order asc) { _id, slug, title, image, _updatedAt }`;
+
+const formatDate = (iso: string) => {
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+};
 
 const CaseStudiesPage = () => {
+  const { data: caseStudies = [] } = useQuery<CaseStudyListItem[]>({
+    queryKey: ["case-studies-list"],
+    queryFn: () => sanityClient.fetch(QUERY),
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
@@ -54,14 +53,14 @@ const CaseStudiesPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study, i) => (
               <motion.div
-                key={study.slug}
+                key={study._id}
                 {...fadeUp}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
               >
-                <Link to={`/case-studies/${study.slug}`} className="group block">
+                <Link to={`/case-studies/${study.slug.current}`} className="group block">
                   <div className="overflow-hidden rounded-xl mb-4">
                     <img
-                      src={study.image}
+                      src={urlFor(study.image).width(800).url()}
                       alt={study.title}
                       className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -69,7 +68,7 @@ const CaseStudiesPage = () => {
                   <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
                     {study.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">{study.date}</p>
+                  <p className="text-muted-foreground text-sm">{formatDate(study._updatedAt)}</p>
                 </Link>
               </motion.div>
             ))}

@@ -1,48 +1,31 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { sanityClient, urlFor } from "@/lib/sanity";
 
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
-import gallery6 from "@/assets/gallery-6.jpg";
-import gallery7 from "@/assets/gallery-7.jpg";
-import gallery8 from "@/assets/gallery-8.jpg";
+type GalleryImage = {
+  _id: string;
+  image: unknown;
+  caption: string;
+  order: number;
+};
 
-const allImages = [
-  { src: gallery1, caption: "Nourishing young minds: Nutritious mid-day meals play a significant role in rural education scenarios." },
-  { src: gallery2, caption: "In MGML learning, children embrace local culture and context through interactive classroom activities." },
-  { src: gallery3, caption: "Hands-on arithmetic: Mastering concepts through tactile learning with the help of pebbles." },
-  { src: gallery4, caption: "Transformative education: RIVER students are benefited by the holistic and inclusive MGML learning approach." },
-  { src: gallery5, caption: "Building knowledge step by step: Students engage in discussions on the staircase, symbolising the ladder of learning in MGML." },
-  { src: gallery6, caption: "Balancing fun and learning: Children take a break, bonding with pet dogs, fostering empathy and responsibility." },
-  { src: gallery7, caption: "Breaks ensure students recharge and connect with nature, fostering a balanced and joyful learning environment." },
-  { src: gallery8, caption: "Connecting with local wisdom: Students listen to a cowherd, blending traditional knowledge into their everyday learning." },
-  { src: gallery1, caption: "Celebrating heritage through puppetry: Girl students discover culture and learning with joy." },
-  { src: gallery3, caption: "Creative expression through art: Students explore their imagination using colours and craft." },
-  { src: gallery5, caption: "Peer learning in action: Older students guide younger ones through collaborative activities." },
-  { src: gallery7, caption: "Outdoor classrooms: Nature becomes the teacher as students learn under open skies." },
-  { src: gallery2, caption: "Community engagement: Parents participate in school activities, strengthening the education ecosystem." },
-  { src: gallery4, caption: "Music and rhythm: Students discover the joy of learning through traditional instruments." },
-  { src: gallery6, caption: "Reading circles: Children gather to share stories, building language skills together." },
-  { src: gallery8, caption: "Science experiments: Hands-on discovery brings textbook concepts to life." },
-  { src: gallery1, caption: "Morning assembly: Students start their day with songs and collective activities." },
-  { src: gallery3, caption: "Garden learning: Students cultivate plants, understanding ecosystems firsthand." },
-  { src: gallery5, caption: "Sports day: Physical activities promote teamwork and healthy competition." },
-  { src: gallery7, caption: "Cultural festivals: Celebrations bring the community together in learning." },
-  { src: gallery2, caption: "Library time: Students explore the world through books and stories." },
-  { src: gallery4, caption: "Village mapping: Students learn geography by mapping their own surroundings." },
-  { src: gallery6, caption: "Graduation day: Celebrating the achievements of young learners." },
-];
+const QUERY = `*[_type == "galleryImage"] | order(order asc) { _id, image, caption, order }`;
 
 const GalleryPage = () => {
   const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+
+  const { data: images = [] } = useQuery<GalleryImage[]>({
+    queryKey: ["gallery-images"],
+    queryFn: () => sanityClient.fetch(QUERY),
+  });
+
+  const visible = showAll ? images : images.slice(0, 12);
 
   const ImageCard = ({ src, caption, index }: { src: string; caption: string; index: number }) => (
     <motion.div
@@ -65,8 +48,6 @@ const GalleryPage = () => {
       <p className="text-muted-foreground text-sm mt-3">{caption}</p>
     </motion.div>
   );
-
-  const allTabImages = showAll ? allImages : allImages.slice(0, 12);
 
   return (
     <div className="min-h-screen bg-background">
@@ -101,11 +82,16 @@ const GalleryPage = () => {
 
             <TabsContent value="all">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {allTabImages.map((item, index) => (
-                  <ImageCard key={index} src={item.src} caption={item.caption} index={index} />
+                {visible.map((item, index) => (
+                  <ImageCard
+                    key={item._id}
+                    src={urlFor(item.image).width(900).url()}
+                    caption={item.caption}
+                    index={index}
+                  />
                 ))}
               </div>
-              {!showAll && (
+              {!showAll && images.length > 12 && (
                 <div className="text-center mt-12">
                   <button
                     onClick={() => setShowAll(true)}
@@ -120,8 +106,13 @@ const GalleryPage = () => {
 
             <TabsContent value="image-gallery">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {allImages.map((item, index) => (
-                  <ImageCard key={index} src={item.src} caption={item.caption} index={index} />
+                {images.map((item, index) => (
+                  <ImageCard
+                    key={item._id}
+                    src={urlFor(item.image).width(900).url()}
+                    caption={item.caption}
+                    index={index}
+                  />
                 ))}
               </div>
             </TabsContent>

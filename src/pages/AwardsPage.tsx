@@ -1,24 +1,12 @@
 // Awards & Recognitions Page
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import NYTArticleModal from "@/components/NYTArticleModal";
+import { sanityClient, urlFor } from "@/lib/sanity";
 import awardsHero from "@/assets/awards-hero.jpg";
-import awardMA from "@/assets/award-ma.jpg";
-import awardReimagine from "@/assets/award-reimagine.png";
-import awardNITI from "@/assets/award-niti.jpg";
-import awardGJ from "@/assets/award-gj.jpg";
-import awardSJF from "@/assets/award-sjf.jpg";
-import awardWEF from "@/assets/award-wef.jpg";
-import awardSchwab from "@/assets/award-schwab.png";
-import awardGDN from "@/assets/award-gdn.png";
-import awardAshoka from "@/assets/award-ashoka.png";
-import awardUNICEF from "@/assets/award-unicef.png";
-import awardRockefeller from "@/assets/award-rockefeller.png";
-import awardHRD from "@/assets/award-hrd.png";
-import awardREArticle1 from "@/assets/award-re-article-1.jpg";
-import awardREArticle2 from "@/assets/award-re-article-2.jpg";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -27,98 +15,20 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
-const awards = [
-  {
-    year: "2021",
-    image: awardMA,
-    title: "Millennium Alliance Innovation Challenge Award - Round 6 In Education Category By Millennium Alliance",
-    desc: "For scaling up the MGML methodology in government primary schools in North India under education category.",
-    link: "https://tinyurl.com/558Ue4e6",
-  },
-  {
-    year: "2018/19",
-    image: awardReimagine,
-    title: "Silver Award Winner - Hybrid Learning Category by Reimagine Education",
-    desc: "For RIVER's innovative pedagogies.",
-    link: "https://tinyurl.com/4epa772d",
-    hasArticle: true,
-  },
-  {
-    year: "2016",
-    image: awardNITI,
-    title: "Top 25 Social Innovations in India by Ministry of External Affairs & NITI Aayog, Govt. of India",
-    desc: "For offering commercially viable solutions to the socio-economic problems of India.",
-    link: "https://tinyurl.com/Sk8runff",
-  },
-  {
-    year: "2016",
-    image: awardMA,
-    title: "Millennium Alliance Innovation Challenge Award - Round 3 In Education Category By Millennium Alliance",
-    desc: "For dissemination of the MGML methodology in government primary schools in the state of Andhra Pradesh.",
-    link: "https://tinyurl.com/2bc76sm6",
-  },
-  {
-    year: "2012",
-    image: awardGJ,
-    title: "Ranked 74 — Top 100 best NGOs in the world by The Global Journal, Geneva",
-    desc: 'As significant agents of social change and seeking to "move beyond outdated clichés and narrow conceptions about what an NGO is and does".',
-    link: "https://tinyurl.com/tfdhb53a",
-  },
-  {
-    year: "2011",
-    image: awardSJF,
-    title: "Jindal Prize By Sitaram Jindal Foundation",
-    desc: "For Education with emphasis on moral upliftment.",
-    link: "https://tinyurl.com/ywbf6tvz",
-  },
-  {
-    year: "2010/11",
-    image: awardWEF,
-    title: "Recognised by Visegrad Regional Seminar on Global Development Education, Prague, Czech Republic; World Economic Summit in Davos, Switzerland; Summer Davos Meeting of New Champions at Dalian, China; Clinton Global Foundation, New York",
-    desc: "RIVER projects and its MGML Methodology as an inspiring way of practice in global development.",
-    link: "https://tinyurl.com/2w5ztuec",
-  },
-  {
-    year: "2009",
-    image: awardSchwab,
-    title: "Social Entrepreneurs Of The Year By The Schwab Foundation For Social Entrepreneurship, World Economic Forum, Geneva",
-    desc: "For pioneering solutions for social and environmental challenges to highlight and expand leading models of social innovation around the world.",
-    link: "https://tinyurl.com/2e6f84ux",
-  },
-  {
-    year: "2004",
-    image: awardGDN,
-    title: "The Japanese Prize for the Most Innovative Development Project by The Global Development Network",
-    desc: "Research on development produced by researchers from developing and transition countries.",
-    link: "https://tinyurl.com/5n6d5r74",
-  },
-  {
-    year: "2003",
-    image: awardAshoka,
-    title: "The Japanese Prize for the Most Innovative Development Project by The Global Development Network",
-    desc: "Ashoka supports the world's leading social entrepreneurs, learns from the patterns in their innovations, and mobilises a global community that embraces these new frameworks.",
-    link: "https://tinyurl.com/2p8y6etc",
-  },
-  {
-    year: "2003",
-    image: awardUNICEF,
-    title: "UNICEF & Government of India",
-    desc: "Recognition for adapting and expanding RIVER learning programmes in government primary schools in 7 Indian states.",
-    link: "https://tinyurl.com/ward88e5",
-  },
-  {
-    year: "1997",
-    image: awardRockefeller,
-    title: "The Rockefeller Foundation Grant",
-    desc: "Rockefeller Grant enriched collaborations across linguistic zones in India.",
-  },
-  {
-    year: "1995",
-    image: awardHRD,
-    title: "Ministry of HRD, Government of India Grant",
-    desc: "Grant for R&D and dissemination of the model.",
-  },
-];
+type Award = {
+  _id: string;
+  year: string;
+  title: string;
+  description: string;
+  image: unknown;
+  linkUrl?: string;
+  order: number;
+};
+
+const QUERY = `*[_type == "award"] | order(order asc) { _id, year, title, description, image, linkUrl, order }`;
+
+// Reimagine 2018/19 is the one that should show the NYT article CTA (per original)
+const ARTICLE_LINKS = new Set(["Silver Award Winner - Hybrid Learning Category by Reimagine Education"]);
 
 const citations = [
   { year: "1996", text: 'Kaplan, Robert D. 1996. "Rishi Valley and human ingenuity". The Ends of the Earth. A Journey at the Dawn of the 21st Century. P 354–368. Random House. New York' },
@@ -133,20 +43,17 @@ const partnershipsLeft = [
   "University of St. Gallen, Switzerland",
   "University of Cambridge, UK",
 ];
-
 const partnershipsRight = [
   "University of Lorraine (formerly Paul Verlaine University, Metz, France)",
   "Teachers College, Columbia University",
   "Brookings Institution, Washington DC",
 ];
-
 const academicLeft = [
   "Harvard Kennedy School",
   "University of Oxford, UK",
   "India School Fund of Harvard Business School",
   "Kent State University, Ohio",
 ];
-
 const academicRight = [
   "City University of New York",
   "University of New England, Australia",
@@ -156,6 +63,10 @@ const academicRight = [
 
 const AwardsPage = () => {
   const [articleOpen, setArticleOpen] = useState(false);
+  const { data: awards = [] } = useQuery<Award[]>({
+    queryKey: ["awards"],
+    queryFn: () => sanityClient.fetch(QUERY),
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -182,52 +93,51 @@ const AwardsPage = () => {
       <section className="py-16 md:py-24">
         <div className="container-wide max-w-5xl mx-auto">
           <div className="space-y-16">
-            {awards.map((award, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp}
-                transition={{ duration: 0.6, delay: i * 0.05 }}
-                className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center"
-              >
-                {/* Image */}
-                <div className={`${i % 2 !== 0 ? "lg:order-2" : ""}`}>
-                  <img
-                    src={award.image}
-                    alt={award.title}
-                    className="w-full rounded-xl max-h-[300px] object-cover"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className={`${i % 2 !== 0 ? "lg:order-1" : ""}`}>
-                  {award.link ? (
-                    <a href={award.link} target="_blank" rel="noopener noreferrer" className="group block">
-                      <span className="font-cormorant text-2xl md:text-3xl font-bold text-primary block mb-2">{award.year}</span>
-                      <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-3">
-                        {award.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">{award.desc}</p>
-                    </a>
-                  ) : (
-                    <div>
-                      <span className="font-cormorant text-2xl md:text-3xl font-bold text-primary block mb-2">{award.year}</span>
-                      <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground mb-3">
-                        {award.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">{award.desc}</p>
-                    </div>
-                  )}
-                  {award.hasArticle && (
-                    <button
-                      onClick={() => setArticleOpen(true)}
-                      className="mt-4 text-primary font-semibold underline underline-offset-4 hover:text-primary/80 transition-colors"
-                    >
-                      Read Article →
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+            {awards.map((award, i) => {
+              const hasArticle = ARTICLE_LINKS.has(award.title);
+              const Content = (
+                <>
+                  <span className="font-cormorant text-2xl md:text-3xl font-bold text-primary block mb-2">{award.year}</span>
+                  <h3 className="font-cormorant text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-3">
+                    {award.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">{award.description}</p>
+                </>
+              );
+              return (
+                <motion.div
+                  key={award._id}
+                  {...fadeUp}
+                  transition={{ duration: 0.6, delay: i * 0.05 }}
+                  className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center"
+                >
+                  <div className={i % 2 !== 0 ? "lg:order-2" : ""}>
+                    <img
+                      src={urlFor(award.image).width(900).url()}
+                      alt={award.title}
+                      className="w-full rounded-xl max-h-[300px] object-cover"
+                    />
+                  </div>
+                  <div className={i % 2 !== 0 ? "lg:order-1" : ""}>
+                    {award.linkUrl ? (
+                      <a href={award.linkUrl} target="_blank" rel="noopener noreferrer" className="group block">
+                        {Content}
+                      </a>
+                    ) : (
+                      <div className="group">{Content}</div>
+                    )}
+                    {hasArticle && (
+                      <button
+                        onClick={() => setArticleOpen(true)}
+                        className="mt-4 text-primary font-semibold underline underline-offset-4 hover:text-primary/80 transition-colors"
+                      >
+                        Read Article →
+                      </button>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

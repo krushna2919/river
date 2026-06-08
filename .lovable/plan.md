@@ -1,58 +1,72 @@
 ## Goal
-Make every page of the site editable from a Sanity-hosted dashboard. Content (text, images) is fetched at runtime from Sanity; the hero video stays in `/public` as you requested.
+Move every page's content (text + images) from hard-coded React/TS data into Sanity, then refactor each page component to fetch from Sanity. Result: full editorial control via Sanity Studio, zero rebuilds needed for content edits.
 
-## Architecture
-```text
-┌─────────────────────┐      ┌──────────────────┐      ┌─────────────────┐
-│  Sanity Studio      │ ───► │  Sanity Content  │ ◄─── │  React Site     │
-│  (you edit here)    │      │  Lake (CDN)      │      │  (@sanity/client)│
-└─────────────────────┘      └──────────────────┘      └─────────────────┘
-```
-- Project ID: `l40ee2px` (dataset: `production`)
-- Studio: hosted by Sanity at a `*.sanity.studio` URL (free, no setup on your side)
-- Frontend: fetches content via `@sanity/client`, caches with react-query
+## Approach
+Schemas, image uploads, seeding, and React refactors all happen via scripts run from the sandbox using `SANITY_WRITE_TOKEN` (already stored). MCP tools used only for schema deploys and verification.
 
-## Schemas to create (one per page + shared types)
-Singletons (one document each):
-- `siteSettings` – footer text, contact info, social links
-- `homePage` – hero heading/CTA, impact stats, NYT spotlight
-- `ourStory`, `methodology`, `rishiValleySchool`, `river`, `schoolInABox`,
-  `services`, `achievements`, `awards`, `contactUs`, `donate`, `aboutUs`
+## Phase 1 — Schema design & deploy
+Design and deploy one Sanity document type per page (or shared types where pages share structure). Planned types:
 
-Collections (many documents each):
-- `teamMember` (name, role, photo, bio, section: leadership/team)
-- `galleryImage` (image, caption, category)
-- `testimonial` (quote, author, org, logo)
-- `caseStudy` (slug, title, hero image, date, sections)
-- `blogPost` (slug, title, date, cover, body — already structured this way)
-- `award` (title, year, image, description, optional article link)
-- `achievement` (title, image, description)
+- `homePage` (singleton) — hero text, impact stats, tabs, NYT spotlight
+- `ourStoryPage` (singleton) — intro, timeline cards[], founder bio
+- `teamPage` (singleton) — leadership[], teamMembers[] with bios
+- `galleryPage` (singleton) — galleryImages[] (with category tabs)
+- `riverPage` (singleton) — sections, state map, gallery[]
+- `methodologyPage` (singleton) — MGML content, flow diagrams
+- `schoolInBoxPage` (singleton) — kit description, learning ladders
+- `servicesPage` (singleton) — services[] (image+bullets)
+- `achievementsPage` (singleton) — achievements[]
+- `awardsPage` (singleton) — awards[] with optional article ref
+- `caseStudiesPage` (singleton) — caseStudies[]
+- `testimonialsPage` (singleton) — orgs[] with quotes (reuses `testimonial` doc)
+- `donatePage` (singleton) — fund options, UPI QR image
+- `contactPage` (singleton) — address, email, map link
+- `rishiValleySchoolPage` (singleton) — content, 9-image grid
+- `article` (multi-doc) — NYT article + future longform
+- `pageMeta` shared object — SEO title/description/ogImage
 
-## Implementation phases
-**Phase 1 – Foundation (this turn)**
-1. Install `@sanity/client`, `@sanity/image-url`
-2. Create `src/lib/sanity.ts` (client + image URL helper)
-3. Deploy schemas to Sanity via MCP
-4. Deploy hosted Studio (you get a URL like `education-children.sanity.studio`)
-5. Add your preview/prod domains to Sanity CORS
-6. Wire up **Blog** and **Testimonials** as the first two live-from-CMS pages (proof of concept)
-7. Seed initial content from current hard-coded data so nothing looks empty
+Deploy via `mcp_sanity_cyIna--deploy_schema` in one call.
 
-**Phase 2 – Migrate remaining pages (follow-up turns)**
-Convert each remaining page to read from Sanity, in this order:
-Home → Our Story → Gallery → Team → Case Studies → Awards → Achievements → RIVER → Methodology → School in a Box → Services → Rishi Valley School → Contact → Donate → About → Footer/Site Settings.
+## Phase 2 — Image upload
+Build a Node script `scripts/upload-images.mjs` that:
+1. Walks `src/assets/` for all PNG/JPG used by pages-in-scope
+2. Uses `@sanity/client`'s `assets.upload()` to upload each
+3. Writes a mapping `scripts/.image-map.json` of `local path → sanity asset _id`
 
-Each page migration is ~1 turn: write schema doc, seed data, swap component to query Sanity.
+This map is consumed by Phase 3 to wire image refs into seed data. The local files stay in repo as fallbacks until Phase 4 cleanup.
+
+## Phase 3 — Seed content
+Build per-page seed JSON files under `scripts/seed-data/*.json` extracted from current hard-coded React data. A unified `scripts/seed-all.mjs` script:
+1. Reads every seed file
+2. Resolves image paths through `.image-map.json` into `{_type: 'image', asset: {_ref, _type: 'reference'}}`
+3. Creates+publishes documents (clears existing first to keep idempotent)
+
+## Phase 4 — Refactor React pages
+For each page, replace local data imports with a `useQuery` GROQ fetch. Pattern (already proven on BlogPage):
+- `src/lib/sanity.ts` already exists
+- Add `src/queries/<page>.ts` with GROQ query string + TS type
+- Page component: `useQuery` → render. Loading state = skeleton; error = fallback to existing local data (safety net).
+
+## Phase 5 — Verify & cleanup
+- `bun run build` must pass
+- Visit every refactored page in preview, confirm parity
+- Add CORS origin for preview + production URLs via MCP
+- Update memory: add `Sanity CMS Architecture` entry noting which pages are Sanity-backed
+
+## Risk mitigations
+- Each page keeps its local data file as a fallback for the first build
+- Refactor pages one-by-one inside Phase 4 (commit-safe checkpoints)
+- If a Sanity query fails at runtime, page falls back to bundled data (no white screen)
+- Image uploads are idempotent (checksum-based dedupe in upload script)
+
+## Out of scope
+- Admin UI inside the React app (still on hold per memory)
+- Migrating the video hero asset (stays bundled)
+- Form submissions (Contact/Donate forms unchanged)
 
 ## Technical notes
-- Hero video stays at `/public/videos/hero-video.mp4` (unchanged).
-- All Sanity reads are public via CDN; no auth/secrets in frontend.
-- Edits in Studio go live immediately (CDN cache ~1 min).
-- Sanity free tier covers this site comfortably (3 users, 10k docs, 1M API CDN reqs/mo).
-
-## What you'll do after Phase 1
-1. Visit the Studio URL I give you
-2. Log in with the same Sanity account
-3. Start editing — changes appear on the site automatically
-
-Shall I proceed with Phase 1?
+- All schema types are singletons (`__experimental_actions` restricted) except `article` and `testimonial`
+- Images stored as Sanity assets with `urlFor()` helper already in place
+- Long body text uses plain string fields (not PortableText) to match existing markdown-style content
+- Estimated ~120 documents + ~80 image uploads total
+- Whole batch likely needs 4-6 follow-up messages due to context size — I'll checkpoint after each phase

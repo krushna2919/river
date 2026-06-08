@@ -2,11 +2,68 @@ import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { blogPosts } from "@/data/blogPosts";
+import { useQuery } from "@tanstack/react-query";
+import { sanityClient, urlFor } from "@/lib/sanity";
+import { blogPosts as fallbackPosts } from "@/data/blogPosts";
+import { blogImageBySlug, fallbackBlogImage } from "@/data/blogImages";
+
+type SanityBlogPost = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  date: string;
+  order?: number;
+  image?: any;
+  body?: string;
+};
+
+const formatDate = (iso: string) => {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+};
+
+type ViewPost = {
+  slug: string;
+  title: string;
+  date: string;
+  image: string;
+  paragraphs: string[];
+};
 
 const BlogDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = blogPosts.find((p) => p.slug === slug);
+
+  const { data } = useQuery({
+    queryKey: ["blogPosts", "all"],
+    queryFn: () =>
+      sanityClient.fetch<SanityBlogPost[]>(
+        `*[_type == "blogPost"] | order(order asc, date desc){
+          _id, title, slug, date, order, image, body
+        }`
+      ),
+  });
+
+  const allPosts: ViewPost[] =
+    data && data.length > 0
+      ? data.map((p) => ({
+          slug: p.slug.current,
+          title: p.title,
+          date: formatDate(p.date),
+          image: p.image
+            ? urlFor(p.image).width(1200).auto("format").url()
+            : blogImageBySlug[p.slug.current] ?? fallbackBlogImage,
+          paragraphs: (p.body ?? "").split(/\n\s*\n/).map((s) => s.trim()).filter(Boolean),
+        }))
+      : fallbackPosts.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          date: p.date,
+          image: p.image,
+          paragraphs: p.content,
+        }));
+
+  const post = allPosts.find((p) => p.slug === slug);
 
   if (!post) {
     return (
@@ -23,8 +80,7 @@ const BlogDetailPage = () => {
     );
   }
 
-  // Get 3 related posts (excluding current)
-  const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const relatedPosts = allPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,11 +112,7 @@ const BlogDetailPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-10"
           >
-            <img
-              src={post.image}
-              alt={post.title}
-              className="w-full rounded-sm"
-            />
+            <img src={post.image} alt={post.title} className="w-full rounded-sm" />
           </motion.div>
 
           <motion.div
@@ -69,16 +121,23 @@ const BlogDetailPage = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="prose prose-lg max-w-none"
           >
-            {post.content.map((paragraph, i) => {
+            {post.paragraphs.map((paragraph, i) => {
               if (paragraph.startsWith("## ")) {
                 return (
-                  <h4 key={i} className="font-heading text-xl md:text-2xl text-foreground mt-8 mb-4 font-medium">
+                  <h4
+                    key={i}
+                    className="font-heading text-xl md:text-2xl text-foreground mt-8 mb-4 font-medium"
+                  >
                     {paragraph.replace("## ", "")}
                   </h4>
                 );
               }
               return (
-                <p key={i} className="text-foreground/80 leading-relaxed mb-5" style={{ fontFamily: "var(--font-body)" }}>
+                <p
+                  key={i}
+                  className="text-foreground/80 leading-relaxed mb-5"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
                   {paragraph}
                 </p>
               );
@@ -87,7 +146,6 @@ const BlogDetailPage = () => {
         </div>
       </article>
 
-      {/* Related Posts */}
       <section className="py-16 bg-background border-t border-border">
         <div className="container-wide">
           <div className="flex items-center justify-between mb-10">

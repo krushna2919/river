@@ -2,14 +2,58 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { blogPosts } from "@/data/blogPosts";
+import { useQuery } from "@tanstack/react-query";
+import { sanityClient, urlFor } from "@/lib/sanity";
+import { blogPosts as fallbackPosts } from "@/data/blogPosts";
+import { blogImageBySlug, fallbackBlogImage } from "@/data/blogImages";
+
+type SanityBlogPost = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  date: string;
+  order?: number;
+  image?: any;
+};
+
+const formatDate = (iso: string) => {
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+};
 
 const BlogPage = () => {
+  const { data } = useQuery({
+    queryKey: ["blogPosts"],
+    queryFn: () =>
+      sanityClient.fetch<SanityBlogPost[]>(
+        `*[_type == "blogPost"] | order(order asc, date desc){
+          _id, title, slug, date, order, image
+        }`
+      ),
+  });
+
+  const posts =
+    data && data.length > 0
+      ? data.map((p) => ({
+          slug: p.slug.current,
+          title: p.title,
+          date: formatDate(p.date),
+          image: p.image
+            ? urlFor(p.image).width(800).height(600).fit("crop").auto("format").url()
+            : blogImageBySlug[p.slug.current] ?? fallbackBlogImage,
+        }))
+      : fallbackPosts.map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          date: p.date,
+          image: p.image,
+        }));
+
   return (
     <div className="min-h-screen bg-background">
       <Header isInnerPage />
 
-      {/* Title */}
       <section className="pt-32 pb-12 border-b border-border">
         <div className="container-wide">
           <motion.h1
@@ -23,11 +67,10 @@ const BlogPage = () => {
         </div>
       </section>
 
-      {/* Blog Grid */}
       <section className="py-16">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {blogPosts.map((post, index) => (
+            {posts.map((post, index) => (
               <motion.div
                 key={post.slug}
                 initial={{ opacity: 0, y: 30 }}

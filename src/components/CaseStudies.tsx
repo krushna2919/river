@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import caseStudyAndhra from "@/assets/case-study-andhra.jpg";
@@ -10,59 +9,41 @@ import blog3 from "@/assets/blog-3.jpg";
 import blog4 from "@/assets/blog-4.jpg";
 import blog5 from "@/assets/blog-5.jpg";
 import blog6 from "@/assets/blog-6.jpg";
+import { useHomePage } from "@/hooks/useHomePage";
+import { urlFor } from "@/lib/sanity";
 
-const caseStudies = [
-  {
-    title: "Snehabala and SLIM Cards for Competency-Based Learning in combined Andhra Pradesh: A Case Study",
-    image: caseStudyAndhra,
-    href: "/case-studies/andhra-pradesh",
-  },
-  {
-    title: "Implementing Vertical Competency Based Learning in Bihar: A Case Study",
-    image: caseStudyBihar,
-    href: "/case-studies/bihar",
-  },
-  {
-    title: "Multi-Grade, Multi-Level (MGML) learning in Jharkhand: A Case Study",
-    image: caseStudyJharkhand,
-    href: "/case-studies/jharkhand",
-  },
+type Item = { _key?: string; title: string; image?: { asset: { _ref: string; _type: "reference" } }; fallbackImage?: string; href: string };
+
+const fallbackCaseStudies: Item[] = [
+  { _key: "c1", title: "Snehabala and SLIM Cards for Competency-Based Learning in combined Andhra Pradesh: A Case Study", fallbackImage: caseStudyAndhra, href: "/case-studies/andhra-pradesh" },
+  { _key: "c2", title: "Implementing Vertical Competency Based Learning in Bihar: A Case Study", fallbackImage: caseStudyBihar, href: "/case-studies/bihar" },
+  { _key: "c3", title: "Multi-Grade, Multi-Level (MGML) learning in Jharkhand: A Case Study", fallbackImage: caseStudyJharkhand, href: "/case-studies/jharkhand" },
 ];
 
-const blogPosts = [
-  {
-    title: "Unlocking the Potential of RIVER's MGML Methodology: Harnessing Local Knowledge and Experiences",
-    image: blog2,
-    href: "/blog/unlocking-mgml-methodology",
-  },
-  {
-    title: "Unleashing Individual Potential: Exploring RIVER's Structured Learning Path",
-    image: blog3,
-    href: "/blog/unleashing-individual-potential",
-  },
-  {
-    title: "Enhancing Learning Diversity: Exploring RIVER's MGML System for Educational Growth",
-    image: blog4,
-    href: "/blog/enhancing-learning-diversity",
-  },
-  {
-    title: "Embarking on the Journey of Educational Excellence with RIVER: Recognising Achievements",
-    image: blog6,
-    href: "/blog/embarking-on-educational-excellence",
-  },
-  {
-    title: "Fostering Community and Transforming Lives: The Impact of RIVER Schools",
-    image: blog5,
-    href: "/blog/fostering-community",
-  },
+const fallbackBlogPosts: Item[] = [
+  { _key: "b1", title: "Unlocking the Potential of RIVER's MGML Methodology: Harnessing Local Knowledge and Experiences", fallbackImage: blog2, href: "/blog/unlocking-mgml-methodology" },
+  { _key: "b2", title: "Unleashing Individual Potential: Exploring RIVER's Structured Learning Path", fallbackImage: blog3, href: "/blog/unleashing-individual-potential" },
+  { _key: "b3", title: "Enhancing Learning Diversity: Exploring RIVER's MGML System for Educational Growth", fallbackImage: blog4, href: "/blog/enhancing-learning-diversity" },
+  { _key: "b4", title: "Embarking on the Journey of Educational Excellence with RIVER: Recognising Achievements", fallbackImage: blog6, href: "/blog/embarking-on-educational-excellence" },
+  { _key: "b5", title: "Fostering Community and Transforming Lives: The Impact of RIVER Schools", fallbackImage: blog5, href: "/blog/fostering-community" },
 ];
 
 const CaseStudies = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeTab, setActiveTab] = useState<"case-studies" | "blog">("case-studies");
+  const { data } = useHomePage();
+  const c = data?.caseStudiesSection;
+
+  const heading = c?.heading ?? "Case Studies";
+  const caseStudies: Item[] = c?.caseStudies?.length ? c.caseStudies : fallbackCaseStudies;
+  const blogPosts: Item[] = c?.blogPosts?.length ? c.blogPosts : fallbackBlogPosts;
+  const csViewAll = c?.caseStudiesViewAllHref ?? "/case-studies";
+  const blogViewAll = c?.blogViewAllHref ?? "/blog";
 
   const items = activeTab === "case-studies" ? caseStudies : blogPosts;
+  const resolveImage = (item: Item) =>
+    item.image ? urlFor(item.image).width(800).auto("format").url() : item.fallbackImage ?? "";
 
   return (
     <section className="py-20 md:py-32 bg-white" ref={ref}>
@@ -73,10 +54,9 @@ const CaseStudies = () => {
           transition={{ duration: 0.5 }}
           className="heading-section text-foreground text-center mb-12"
         >
-          Case Studies
+          {heading}
         </motion.h2>
 
-        {/* Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -105,7 +85,6 @@ const CaseStudies = () => {
           </button>
         </motion.div>
 
-        {/* Cards Grid */}
         <motion.div
           key={activeTab}
           initial={{ opacity: 0 }}
@@ -115,7 +94,7 @@ const CaseStudies = () => {
         >
           {items.slice(0, 3).map((item, index) => (
             <motion.div
-              key={item.title}
+              key={item._key ?? item.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -126,11 +105,7 @@ const CaseStudies = () => {
                 className="group case-study-card overflow-hidden rounded-lg block"
               >
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={resolveImage(item)} alt={item.title} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 bg-light-gray">
                   <h3 className="font-heading text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2">
@@ -142,7 +117,6 @@ const CaseStudies = () => {
           ))}
         </motion.div>
 
-        {/* View All Link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -150,7 +124,7 @@ const CaseStudies = () => {
           className="text-center mt-10"
         >
           <a
-            href={activeTab === "case-studies" ? "/case-studies" : "/blog"}
+            href={activeTab === "case-studies" ? csViewAll : blogViewAll}
             className="inline-flex items-center gap-2 text-primary font-semibold uppercase text-sm tracking-wider hover:gap-3 transition-all"
           >
             View all

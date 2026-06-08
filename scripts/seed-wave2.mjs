@@ -1,7 +1,7 @@
 // Wave 2 seed: 8 inner singleton pages.
 // Idempotent: uses fixed _id per page; createOrReplace overwrites cleanly.
 // Run: node scripts/seed-wave2.mjs
-import { writeClient } from "./sanity-client.mjs";
+import { client } from "./sanity-client.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -409,7 +409,7 @@ const docs = [ourStory, river, methodology, schoolInABox, rishiValleySchool, ser
 
 console.log(`Seeding ${docs.length} singleton pages...`);
 for (const doc of docs) {
-  await writeClient.createOrReplace(doc);
+  await client.createOrReplace(doc);
   console.log(`  ✓ ${doc._type} (${doc._id})`);
 }
 console.log("Done.");

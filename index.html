@@ -22,7 +22,15 @@
     <meta name="twitter:image" content="/icon-192.png" />
   </head>
 
-  <body>
+  <body oncontextmenu="return false;">
+    <script>
+      (function () {
+        var block = function (e) { e.preventDefault(); e.stopPropagation(); return false; };
+        window.addEventListener("contextmenu", block, true);
+        document.addEventListener("contextmenu", block, true);
+        document.oncontextmenu = block;
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
